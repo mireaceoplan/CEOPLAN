@@ -8189,7 +8189,8 @@ modal.classList.remove('open');
   object-position:center top !important;
   border-radius:0 !important;
   background:transparent !important;
-  filter:drop-shadow(0 30px 80px rgba(30,58,95,.16)) !important;
+  filter:none !important;
+  -webkit-filter:none !important;
 }
 
 @media (max-width:1060px){
@@ -8213,7 +8214,8 @@ modal.classList.remove('open');
   .hero .visual-stage .image-layer img,
   .hero .visual-stage #imageA img,
   .hero .visual-stage #imageB img{
-    filter:drop-shadow(0 18px 42px rgba(30,58,95,.14)) !important;
+    filter:none !important;
+    -webkit-filter:none !important;
   }
 }
 </style>
@@ -8880,6 +8882,84 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
   });
 })();
 </script>
+
+
+
+<style id="github-hero-rounded-png-mask-final">
+/* =========================================================
+   GitHub Pages 히어로 PNG 라운드 최종 보정
+   - main_1.png / main_2.png는 투명 캔버스 위에 사진이 들어간 PNG 구조라
+     전체 div를 둥글게 자르면 머리 돌출 구도가 깨지고,
+     div를 풀면 사진 내부 모서리가 사각형으로 보임.
+   - 그래서 이미지 자체에 SVG mask를 적용해 중앙 인물 돌출부는 살리고,
+     실제 사진 박스 영역만 라운드 처리함.
+   - 히어로 이미지에만 적용. 카드/버튼/하단 섹션 영향 없음.
+   ========================================================= */
+.hero .visual-stage .image-layer,
+.hero .visual-stage #imageA,
+.hero .visual-stage #imageB{
+  background:transparent !important;
+  overflow:visible !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+}
+
+.hero .visual-stage .image-layer img,
+.hero .visual-stage #imageA img,
+.hero .visual-stage #imageB img{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+  object-position:center top !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  filter:none !important;
+  -webkit-filter:none !important;
+  -webkit-mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1448 1086'%3E%3Crect x='0' y='170' width='1448' height='916' rx='58' ry='58' fill='black'/%3E%3Crect x='420' y='0' width='610' height='265' rx='0' ry='0' fill='black'/%3E%3C/svg%3E") !important;
+  mask-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1448 1086'%3E%3Crect x='0' y='170' width='1448' height='916' rx='58' ry='58' fill='black'/%3E%3Crect x='420' y='0' width='610' height='265' rx='0' ry='0' fill='black'/%3E%3C/svg%3E") !important;
+  -webkit-mask-size:100% 100% !important;
+  mask-size:100% 100% !important;
+  -webkit-mask-repeat:no-repeat !important;
+  mask-repeat:no-repeat !important;
+  -webkit-mask-position:center top !important;
+  mask-position:center top !important;
+}
+
+@media (max-width:760px){
+  .hero .visual-stage .image-layer img,
+  .hero .visual-stage #imageA img,
+  .hero .visual-stage #imageB img{
+    filter:none !important;
+    -webkit-filter:none !important;
+  }
+}
+</style>
+
+
+<style id="github-hero-no-mosaic-final">
+/* =========================================================
+   GitHub Pages 히어로 PNG 라운드 보정 최종 안정화
+   - 이전 mask 보정에서 drop-shadow가 mask의 상단 사각 영역까지 그림자로 인식해
+     배경 위에 흐린 사각 패치가 생기던 문제 제거
+   - 라운드 mask는 유지하고, 히어로 이미지 자체의 필터/배경/그림자만 제거
+   ========================================================= */
+.hero .visual-stage .image-layer,
+.hero .visual-stage #imageA,
+.hero .visual-stage #imageB{
+  background:transparent !important;
+  box-shadow:none !important;
+  overflow:visible !important;
+}
+
+.hero .visual-stage .image-layer img,
+.hero .visual-stage #imageA img,
+.hero .visual-stage #imageB img{
+  background:transparent !important;
+  filter:none !important;
+  -webkit-filter:none !important;
+}
+</style>
 
 </body>
 </html>
