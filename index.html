@@ -5368,6 +5368,8 @@ body{
 /* === 대표 자산화 전략: 헤딩 + 좌측 앵커 네비 이분할 === */
 #asset-strategy,#difference,#process,#expert,#cases{scroll-margin-top:96px;}
 .asset-strategy{padding:112px 0 !important;background:#fff !important;}
+/* v170 · 핵심 점검 포인트와 상하 여백 균형: 자산화 전략 섹션만 상단 패딩 축소(전문가팀 섹션은 .asset-strategy 공유이므로 ID로 한정) */
+#asset-strategy{padding-top:64px !important;}
 .asec-body{display:grid !important;grid-template-columns:260px minmax(0,1fr) !important;column-gap:48px !important;align-items:start !important;padding-top:42px !important;border-top:1px solid #E9EDF2 !important;}
 .asec-nav{display:flex !important;flex-direction:column !important;gap:4px !important;padding-top:6px !important;position:sticky !important;top:110px !important;align-self:start !important;}
 .asec-item{display:flex !important;align-items:center !important;width:100% !important;min-height:54px !important;text-decoration:none !important;background:transparent !important;border:0 !important;padding:0 !important;cursor:pointer !important;text-align:left !important;color:#A1A1AA !important;font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif !important;font-size:18px !important;line-height:1.45 !important;letter-spacing:-.02em !important;font-weight:600 !important;transition:color .2s ease !important;}
