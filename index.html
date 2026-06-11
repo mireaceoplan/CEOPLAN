@@ -2178,7 +2178,7 @@ body{
    - 설명형 카드 반복이 아니라 큰 질문 + 3개 체크리스트 구조 */
 .check-bridge{
   background:#FFFFFF !important;
-  padding:112px 0 !important;
+  padding:84px 0 !important;
 }
 
 .check-bridge .wrap{
@@ -2190,7 +2190,7 @@ body{
   display:grid;
   grid-template-columns:minmax(0, 1.08fr) minmax(360px, .92fr);
   gap:72px;
-  align-items:center;
+  align-items:start;
 }
 
 .check-copy{
@@ -2198,13 +2198,21 @@ body{
 }
 
 .check-copy .eyebrow{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  height:40px !important;
+  padding:0 18px !important;
   margin-bottom:18px !important;
+  border-radius:12px !important;
+  border:1px solid #E5E7EB !important;
+  background:#FFFFFF !important;
   font-family:"Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
   font-size:16px !important;
   line-height:1 !important;
-  letter-spacing:.08em !important;
+  letter-spacing:-.02em !important;
   font-weight:600 !important;
-  color:#8B6F3D !important;
+  color:#171717 !important;
 }
 
 .check-copy .s-title{
@@ -2240,10 +2248,10 @@ body{
 .check-panel{
   position:relative;
   background:#F2F4F7;
-  border:1px solid #E9ECF0;
+  border:1px solid #DDE3EA;
   border-radius:24px;
   padding:34px 36px 36px;
-  box-shadow:0 20px 44px rgba(30,58,95,.06);
+  box-shadow:0 24px 56px rgba(30,58,95,.10);
 }
 
 .check-panel:before{
@@ -2251,14 +2259,14 @@ body{
   position:absolute;
   inset:0;
   border-radius:24px;
-  border:1px solid rgba(196,167,125,.18);
+  border:1px solid rgba(196,167,125,.35);
   pointer-events:none;
 }
 
 .panel-top{
   padding-bottom:22px;
   margin-bottom:6px;
-  border-bottom:1px solid #EEF1F4;
+  border-bottom:1px solid #D8C29B;
 }
 
 .panel-kicker{
@@ -2295,7 +2303,7 @@ body{
   gap:16px;
   align-items:center;
   padding:22px 0;
-  border-bottom:1px solid #F1F3F6;
+  border-bottom:1px solid #E7EBF0;
 }
 
 .check-list li:last-child{
@@ -2310,20 +2318,20 @@ body{
   width:44px;
   height:44px;
   border-radius:50%;
-  background:#F8FAFC;
-  border:1px solid #E9ECF0;
+  background:#1E3A5F;
+  border:1px solid #1E3A5F;
   font-family:"Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
-  font-size:13px;
+  font-size:14px;
   line-height:1;
   letter-spacing:0;
   font-weight:600;
-  color:#1E3A5F;
+  color:#FFFFFF;
 }
 
 .check-list li p{
   margin:0;
   font-family:"Pretendard", -apple-system, BlinkMacSystemFont, system-ui, sans-serif !important;
-  font-size:18px;
+  font-size:19px;
   line-height:1.55;
   letter-spacing:-.01em;
   font-weight:500;
@@ -2333,7 +2341,7 @@ body{
 
 @media (max-width:1199.98px){
   .check-bridge{
-    padding:88px 0 !important;
+    padding:72px 0 !important;
   }
 
   .check-bridge .wrap{
@@ -2369,7 +2377,7 @@ body{
 
 @media (max-width:809.98px){
   .check-bridge{
-    padding:64px 0 !important;
+    padding:56px 0 !important;
   }
 
   .check-bridge .wrap{
@@ -2377,7 +2385,9 @@ body{
   }
 
   .check-copy .eyebrow{
-    font-size:12.5px !important;
+    height:36px !important;
+    padding:0 14px !important;
+    font-size:14px !important;
   }
 
   .check-copy .s-title{
@@ -5377,7 +5387,7 @@ body{
 }
 .asec-rhead{text-align:left !important;margin-bottom:24px !important;}
 .asec-rhead strong{display:block !important;font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif !important;font-size:28px !important;font-weight:600 !important;color:#27272A !important;line-height:1.4 !important;letter-spacing:-.03em !important;}
-.asec-rhead p{margin-top:12px !important;font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif !important;font-size:18px !important;font-weight:400 !important;color:#A1A1AA !important;line-height:1.6 !important;}
+.asec-rhead p{margin-top:12px !important;padding-bottom:2px !important;font-family:"Pretendard",-apple-system,BlinkMacSystemFont,system-ui,sans-serif !important;font-size:18px !important;font-weight:400 !important;color:#A1A1AA !important;line-height:1.6 !important;}
 .asec-right .cmp{max-width:100% !important;}
 .asec-right .cmp .c{justify-content:center !important;text-align:center !important;font-size:18px !important;}
 .asec-right-ph{color:#AEB4BD !important;font-size:14px !important;font-weight:600 !important;letter-spacing:.02em !important;}
@@ -6380,7 +6390,7 @@ body{
 <section class="hero">
   <div class="wrap">
     <span class="hero-badge">법인 대표를 위한 CEO플랜 점검</span>
-    <h1>잘 버는 회사는 많습니다.<br>잘 <span class="g">남기는 대표</span>는 드뭅니다.</h1>
+    <h1>잘 버는 회사는 많습니다.<br><span class="g">잘 남기는 대표</span>는 드뭅니다.</h1>
     <p class="sub">퇴직금부터 승계·상속까지<br>회계법인이 대표님 편에서 숫자로 먼저 점검합니다.</p>
     <div class="cta">
       <a href="#contact" class="btn btn-navy">사전 점검 신청하기 &rarr;</a>
@@ -6503,20 +6513,19 @@ body{
   <div class="wrap">
     <div class="check-layout">
       <div class="check-copy">
-        <div class="eyebrow">CHECK POINT</div>
-        <h2 class="s-title">대표님에게 일이 생겼을 때,<br>회사와 가족을 지킬 <b>지급 근거</b>가 있습니까?</h2>
-        <p class="s-lead">법인 이익이 곧 대표님의 자산이 되는 것은 아닙니다. 퇴직금, 유족보상금, 승계 재원은 정관과 지급 규정이 먼저 준비되어야 합니다.</p>
+        <div class="eyebrow">핵심 점검 포인트</div>
+        <h2 class="s-title">정관에 <b>근거 없는 지급</b>은,<br>결국 세금으로 돌아옵니다.</h2>
+        <p class="s-lead">법인 이익이 곧 대표님의 자산이 되는 것은 아닙니다.<br>퇴직금도, 유족보상금도, 승계 재원도 정관과 지급 규정이 먼저입니다.</p>
       </div>
 
       <div class="check-panel" aria-label="지금 확인해야 할 3가지">
         <div class="panel-top">
-          <span class="panel-kicker">3 CHECKS</span>
           <strong>지금 확인해야 할 3가지</strong>
         </div>
         <ul class="check-list">
-          <li><span>01</span><p>정관에 지급 근거가 있습니까?</p></li>
-          <li><span>02</span><p>임원 퇴직금 산식이 정리되어 있습니까?</p></li>
-          <li><span>03</span><p>유족보상금·승계 재원 기준이 있습니까?</p></li>
+          <li><span>01</span><p>정관에 임원 퇴직금 지급 근거가 있습니까?</p></li>
+          <li><span>02</span><p>퇴직금 산식과 지급 배수가 정리되어 있습니까?</p></li>
+          <li><span>03</span><p>유족보상금·승계 재원의 기준이 있습니까?</p></li>
         </ul>
       </div>
     </div>
@@ -6530,7 +6539,7 @@ body{
   <div class="wrap">
     <div class="gcheck-head">
       <span class="as-pill">대표 자산화 전략</span>
-      <h2 class="as-title">대표님의 자산화와 승계 준비,<br>회계사와 함께 <span class="as-navy">숫자와 근거</span>로 먼저 점검하세요</h2>
+      <h2 class="as-title">법인에 쌓인 이익,<br><span class="as-navy">대표님 자산</span>으로 가져올 차례입니다</h2>
       <div class="as-gap" aria-hidden="true"></div>
     </div>
     <div class="asec-body">
@@ -6544,7 +6553,7 @@ body{
         <div class="asec-view is-active" id="as-core" data-view="core">
           <div class="asec-rhead">
             <strong>리파인드가 직접 점검하는 핵심 영역</strong>
-            <p>탭을 눌러 영역별 내용을 확인하세요. 법인·가족·승계까지 대표님과 함께 미래를 바라봅니다.</p>
+            <p>탭을 눌러 영역별로 확인하세요. 정관부터 승계 시나리오까지, 세무·회계 분야별 회계사팀이 함께 들여다봅니다.</p>
           </div>
           <div class="asec-subtabs">
             <button class="asec-subtab on" data-st="c1" type="button">정관</button>
@@ -6589,16 +6598,16 @@ body{
 
         <div class="asec-view" id="as-diff" data-view="diff">
           <div class="asec-rhead">
-            <strong>CEO플랜은 가입이 아니라,<br>구조를 정비하는 일입니다</strong>
-            <p>회계법인은 상품 권유 이전에, 회사의 성장 단계에 맞춰 대표의 보상·퇴직·승계 구조부터 점검합니다.</p>
+            <strong>문제는 세금이 아니라,<br>대표님 회사의 구조입니다</strong>
+            <p>같은 매출이어도 구조에 따라 손에 남는 돈은 완전히 달라집니다. 보상·퇴직·승계 중 하나라도 어긋나 있으면, 정작 승계 시점에 세금 낼 현금이 없습니다. 회계사가 회사 구조부터 먼저 들여다보는 이유입니다.</p>
           </div>
           <div class="asec-rbox">
             <div class="cmp">
-              <div class="r h"><div class="c l">일반적인 방식</div><div class="c r2">리파인드 방식</div></div>
-              <div class="r"><div class="c l"><span class="mk">–</span>상품부터 권합니다</div><div class="c r2"><span class="mk">✓</span>회사 구조부터 점검합니다</div></div>
-              <div class="r"><div class="c l"><span class="mk">–</span>가입하면 끝납니다</div><div class="c r2"><span class="mk">✓</span>점검 결과를 리포트로 남깁니다</div></div>
-              <div class="r"><div class="c l"><span class="mk">–</span>외부 전문가에게 맡깁니다</div><div class="c r2"><span class="mk">✓</span>회계법인이 직접 검토합니다</div></div>
-              <div class="r"><div class="c l"><span class="mk">–</span>영업 담당자가 설명합니다</div><div class="c r2"><span class="mk">✓</span>회계사가 직접 상담합니다</div></div>
+              <div class="r h"><div class="c l">일반적인 방식</div><div class="c r2">리파인드와 함께라면</div></div>
+              <div class="r"><div class="c l"><span class="mk">–</span>신고할 숫자만 봅니다</div><div class="c r2"><span class="mk">✓</span>회사와 대표님 자산을 한 번에 봅니다</div></div>
+              <div class="r"><div class="c l"><span class="mk">–</span>세금이 나오면 그때 줄입니다</div><div class="c r2"><span class="mk">✓</span>세금이 나오기 전에 구조를 잡습니다</div></div>
+              <div class="r"><div class="c l"><span class="mk">–</span>세금을 줄이는 선에서 끝납니다</div><div class="c r2"><span class="mk">✓</span>정작 낼 현금이 없는 상황을 막습니다</div></div>
+              <div class="r"><div class="c l"><span class="mk">–</span>담당자 한 명이 판단합니다</div><div class="c r2"><span class="mk">✓</span>분야별 회계사팀이 직접 교차 검토합니다</div></div>
             </div>
           </div>
         </div>
@@ -6612,7 +6621,7 @@ body{
             <ol class="asec-proc">
               <li class="proc-row">
                 <div class="proc-l"><span class="proc-num">STEP 01</span><span class="proc-title">신청</span></div>
-                <div class="proc-r">사전 점검을 신청하시면, 담당 회계사가 배정됩니다.</div>
+                <div class="proc-r">사전 점검을 신청하시면, 담당 회계사와 분야별 전문가팀이 배정됩니다.</div>
               </li>
               <li class="proc-row">
                 <div class="proc-l"><span class="proc-num">STEP 02</span><span class="proc-title">사전 상담 · 자료 수집</span></div>
@@ -6620,7 +6629,7 @@ body{
               </li>
               <li class="proc-row">
                 <div class="proc-l"><span class="proc-num">STEP 03</span><span class="proc-title">구조 점검 · 분석</span></div>
-                <div class="proc-r">정관·임원보수·퇴직금·재무·세무 구조를 회계사가 직접 검토합니다.</div>
+                <div class="proc-r">정관·임원보수·퇴직금·재무·세무 구조를 분야별 회계사팀이 교차 검토합니다.</div>
               </li>
               <li class="proc-row">
                 <div class="proc-l"><span class="proc-num">STEP 04</span><span class="proc-title">결과 리포트 · 상담</span></div>
