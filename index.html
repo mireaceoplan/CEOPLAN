@@ -6388,7 +6388,10 @@ body{
     </div>
     <div class="visual-stage" id="stage">
       <div class="slide slide-a" data-slide="a">
-        <div class="image-layer" id="imageA"><img src="main_1.png" alt="회계법인 전문가 상담 장면"></div>
+        <div class="image-layer" id="imageA">
+          <div class="hero-photo-body" aria-hidden="true"><img class="hero-split-img" src="main_1.png" alt=""></div>
+          <div class="hero-photo-head" aria-hidden="true"><img class="hero-split-img" src="main_1.png" alt=""></div>
+        </div>
         <div class="float-card metric-card left-metric" data-card="a">
           <div class="label">가업승계 실행 경험</div>
           <div class="value" data-end="20" data-type="plusUnit" data-unit="건">20<small>+건</small></div>
@@ -6405,7 +6408,10 @@ body{
         </div>
       </div>
       <div class="slide slide-b" data-slide="b">
-        <div class="image-layer" id="imageB"><img src="main_2.png" alt="회계법인 전문가 상담 장면"></div>
+        <div class="image-layer" id="imageB">
+          <div class="hero-photo-body" aria-hidden="true"><img class="hero-split-img" src="main_2.png" alt=""></div>
+          <div class="hero-photo-head" aria-hidden="true"><img class="hero-split-img" src="main_2.png" alt=""></div>
+        </div>
         <div class="float-card metric-card left-metric" data-card="b">
           <div class="label">지속가능 승계 로드맵</div>
           <div class="value" data-end="3" data-type="unit" data-unit="세대">3<small>세대</small></div>
@@ -8958,6 +8964,120 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
   background:transparent !important;
   filter:none !important;
   -webkit-filter:none !important;
+}
+</style>
+
+
+
+<style id="github-hero-split-round-final">
+/* =========================================================
+   GitHub Pages 히어로 라운드 최종 안정화 v4
+   핵심: PNG 1장을 CSS mask로 억지 처리하지 않고,
+   같은 PNG를 '둥근 사진 본문' + '머리 돌출부' 두 레이어로 분리 렌더링.
+   - 본문 레이어: 실제 사진 영역만 border-radius + overflow:hidden
+   - 머리 레이어: 상단 인물 돌출 영역만 별도 노출
+   - mask-image / filter / 회색 background 미사용
+   - GitHub Pages 캐시나 브라우저 mask 지원 이슈와 무관하게 동작
+   ========================================================= */
+.hero .visual-stage .image-layer,
+.hero .visual-stage #imageA,
+.hero .visual-stage #imageB{
+  position:absolute !important;
+  background:transparent !important;
+  border-radius:0 !important;
+  overflow:visible !important;
+  box-shadow:none !important;
+  clip-path:none !important;
+  -webkit-mask-image:none !important;
+  mask-image:none !important;
+  isolation:isolate !important;
+}
+
+.hero .visual-stage .image-layer > img{
+  display:none !important;
+}
+
+.hero .visual-stage .hero-photo-body,
+.hero .visual-stage .hero-photo-head{
+  position:absolute !important;
+  display:block !important;
+  margin:0 !important;
+  padding:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  filter:none !important;
+  -webkit-filter:none !important;
+  pointer-events:none !important;
+  transform:none !important;
+  will-change:auto !important;
+}
+
+/* 실제 사진 박스 영역: PNG 기준 y=170~1086 영역만 둥글게 잘라서 표시 */
+.hero .visual-stage .hero-photo-body{
+  left:0 !important;
+  top:15.6538% !important;        /* 170 / 1086 */
+  width:100% !important;
+  height:84.3462% !important;     /* 916 / 1086 */
+  overflow:hidden !important;
+  border-radius:28px !important;
+  z-index:1 !important;
+}
+
+.hero .visual-stage .hero-photo-body .hero-split-img{
+  position:absolute !important;
+  left:0 !important;
+  top:-18.5589% !important;       /* -170 / 916 */
+  width:100% !important;
+  height:auto !important;
+  max-width:none !important;
+  display:block !important;
+  object-fit:contain !important;
+  object-position:center top !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  filter:none !important;
+  -webkit-filter:none !important;
+  clip-path:none !important;
+  -webkit-mask-image:none !important;
+  mask-image:none !important;
+}
+
+/* 상단 인물 돌출부: PNG 기준 x=420~1030, y=0~265 영역만 별도 표시 */
+.hero .visual-stage .hero-photo-head{
+  left:29.0055% !important;       /* 420 / 1448 */
+  top:0 !important;
+  width:42.1271% !important;      /* 610 / 1448 */
+  height:24.4015% !important;     /* 265 / 1086 */
+  overflow:hidden !important;
+  border-radius:0 !important;
+  z-index:2 !important;
+}
+
+.hero .visual-stage .hero-photo-head .hero-split-img{
+  position:absolute !important;
+  left:-68.8525% !important;      /* -420 / 610 */
+  top:0 !important;
+  width:237.3770% !important;     /* 1448 / 610 */
+  height:auto !important;
+  max-width:none !important;
+  display:block !important;
+  object-fit:contain !important;
+  object-position:center top !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  box-shadow:none !important;
+  filter:none !important;
+  -webkit-filter:none !important;
+  clip-path:none !important;
+  -webkit-mask-image:none !important;
+  mask-image:none !important;
+}
+
+@media (max-width:760px){
+  .hero .visual-stage .hero-photo-body{
+    border-radius:18px !important;
+  }
 }
 </style>
 
