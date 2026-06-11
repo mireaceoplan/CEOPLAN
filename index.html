@@ -6369,7 +6369,6 @@ body{
     <a href="#asset-strategy">점검 항목</a><a href="#expert-cases">전문가</a><a href="#cases">사례</a><a href="#faq">자주 묻는 질문</a>
   </nav>
   <div class="nav-cta">
-    <a href="tel:0220374651" class="btn btn-ghost">📞 02-2037-4651</a>
     <a href="#contact" class="btn btn-navy">사전 점검 문의</a>
   </div>
   <button class="menu-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">&#9776;</button>
@@ -6381,10 +6380,9 @@ body{
 <section class="hero">
   <div class="wrap">
     <span class="hero-badge">법인 대표를 위한 CEO플랜 점검</span>
-    <h1>잘 버는 회사는 많습니다<br><span class="g">잘 남기는 대표</span>는 드뭅니다</h1>
+    <h1>잘 버는 회사는 많습니다.<br>잘 <span class="g">남기는 대표</span>는 드뭅니다.</h1>
     <p class="sub">퇴직금부터 승계·상속까지<br>회계법인이 대표님 편에서 숫자로 먼저 점검합니다.</p>
     <div class="cta">
-      <a href="tel:0220374651" class="btn btn-ghost">전화 상담</a>
       <a href="#contact" class="btn btn-navy">사전 점검 신청하기 &rarr;</a>
     </div>
     <div class="visual-stage" id="stage">
@@ -8422,13 +8420,12 @@ modal.classList.remove('open');
       <div class="form">
         <div class="ft">사전 점검 문의</div>
         <div class="fs">필수 정보만 받습니다 · 1분 소요</div>
-        <div class="fg"><input type="text" placeholder="성함 *"></div>
-        <div class="fg"><input type="tel" placeholder="연락처 *"></div>
-        <div class="fg"><input type="text" placeholder="법인명"></div>
-        <div class="fg"><select><option>관심 영역</option><option>정관·임원보수 점검</option><option>퇴직금·유족보상금 정비</option><option>승계 시나리오 검토</option><option>세무 리스크 점검</option><option>종합 사전 점검</option></select></div>
+        <div class="fg"><input type="text" id="mfName" placeholder="성함 *"></div>
+        <div class="fg"><input type="tel" id="mfTel" placeholder="연락처 *"></div>
+        <div class="fg"><input type="text" id="mfCorp" placeholder="법인명"></div>
+        <div class="fg"><select id="mfInterest"><option>관심 영역</option><option>정관·임원보수 점검</option><option>퇴직금·유족보상금 정비</option><option>승계 시나리오 검토</option><option>세무 리스크 점검</option><option>종합 사전 점검</option></select></div>
         <div class="consent"><input type="checkbox" id="ag"><label for="ag">개인정보 수집·이용에 동의합니다 (필수)</label></div>
-        <button class="submit">사전 점검 문의하기 &rarr;</button>
-        <div class="telalt">또는 전화 상담 · <b>02-2037-4651</b></div>
+        <button class="submit" id="mfSubmit">사전 점검 문의하기 &rarr;</button>
       </div>
     </div></div>
   </div>
@@ -8445,7 +8442,7 @@ modal.classList.remove('open');
         <span class="s">대표자 이종헌</span><br>
         사업자등록번호 830-81-03620<br>
         서울특별시 강남구 강남대로 140길 18, 3층<br>
-        Tel. 02-2037-4651 · 카카오톡 · 블로그
+        카카오톡 · 블로그
       </div>
     </div>
     <div class="fcol"><h4>점검 서비스</h4><a href="#asset-strategy">정관 점검</a><a href="#asset-strategy">임원보수·퇴직금</a><a href="#asset-strategy">유족보상금</a><a href="#asset-strategy">세무 리스크</a><a href="#asset-strategy">승계 시나리오</a></div>
@@ -8459,7 +8456,172 @@ modal.classList.remove('open');
 </div></footer>
 
 <!-- 플로팅 문의 버튼 -->
-<a href="#contact" class="float-chat">💬 사전 점검 문의</a>
+<!-- ============================================================
+     16 · STICKY FORM : 우하단 플로팅 정보 입력 배너 (딥 잉크 + 골드)
+     - 트러스트 섹션(.trust-proof-lite)부터 노출
+     - 잔여 건수 : Apps Script 연동(SF_API) / 미연동 시 SF_FALLBACK 사용
+     ============================================================ -->
+<style>
+#sfWrap{position:fixed;right:24px;bottom:24px;z-index:95;opacity:0;pointer-events:none;transform:translateY(14px);transition:opacity .35s ease,transform .35s ease;}
+#sfWrap.sf-on{opacity:1;pointer-events:auto;transform:translateY(0);}
+.sf-card{width:296px;background:#15171C;border-radius:18px;padding:20px 20px 18px;box-shadow:0 18px 48px rgba(0,0,0,.35);}
+.sf-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:16px;}
+.sf-x{background:none;border:none;color:#5C636E;font-size:24px;line-height:1;cursor:pointer;padding:0 0 0 8px;}
+.sf-x:hover{color:#A9ADB5;}
+.sf-title{font-size:19px;font-weight:600;color:#fff;margin:0;line-height:1.3;}
+.sf-numrow{display:flex;align-items:baseline;gap:8px;margin-bottom:12px;}
+.sf-num{font-size:56px;font-weight:600;color:#E9DDC6;line-height:1;}
+.sf-unit{font-size:19px;font-weight:600;color:#D8C29B;}
+.sf-cap{font-size:14.5px;color:#7C7F86;}
+.sf-urgent{display:none;font-size:13px;font-weight:700;color:#15171C;background:#D8C29B;border-radius:6px;padding:4px 9px;margin-left:auto;}
+.sf-bar{height:4px;background:#2A2D33;border-radius:2px;margin-bottom:16px;overflow:hidden;}
+.sf-fill{width:100%;height:4px;background:#C4A77D;border-radius:2px;transition:width .9s ease;}
+.sf-trust{font-size:15px;color:#A9ADB5;margin:0 0 16px;}
+.sf-in{width:100%;box-sizing:border-box;background:#fff;border:none;border-radius:10px;padding:14px 16px;font-size:16px;color:#1A1A1A;margin-bottom:9px;font-family:inherit;}
+.sf-in::placeholder{color:#9A958A;}
+.sf-agree{display:flex;align-items:center;gap:8px;font-size:13.5px;color:#8A8E96;margin:3px 0 12px;cursor:pointer;}
+.sf-agree input{accent-color:#C4A77D;width:16px;height:16px;}
+.sf-btn{width:100%;background:#C4A77D;color:#1A1A1A;border:none;border-radius:10px;padding:15px;font-size:17px;font-weight:700;cursor:pointer;font-family:inherit;}
+.sf-btn:hover{background:#D8C29B;}
+.sf-btn:disabled{opacity:.55;cursor:default;}
+.sf-done{display:none;text-align:center;color:#E9DDC6;font-size:16px;line-height:1.7;padding:20px 0 14px;}
+.sf-pill{display:none;flex-direction:column;align-items:center;justify-content:center;gap:3px;width:154.5px;height:57px;background:#15171C;color:#fff;border:none;border-radius:28px;padding:0;cursor:pointer;box-shadow:0 12px 32px rgba(0,0,0,.3);font-family:inherit;}
+.sf-pill .l2{font-size:20px;font-weight:700;line-height:1;display:flex;align-items:center;gap:8px;}
+.sf-pill b{color:#D8C29B;}
+.sf-pill .dot{width:8px;height:8px;border-radius:50%;background:#C4A77D;display:inline-block;animation:sfPulse 1.8s infinite;}
+.sf-pill b{color:#D8C29B;}
+@keyframes sfPulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+#sfWrap.sf-min .sf-card{display:none;}
+#sfWrap.sf-min .sf-pill{display:flex;}
+@media (max-width:640px){#sfWrap{right:14px;bottom:14px;}.sf-card{width:calc(100vw - 28px);max-width:296px;}}
+</style>
+
+<div id="sfWrap" aria-live="polite">
+  <div class="sf-card">
+    <div class="sf-top">
+      <p class="sf-title">이번 달 무료 사전 점검</p>
+      <button class="sf-x" id="sfClose" aria-label="배너 접기">&times;</button>
+    </div>
+    <div class="sf-numrow">
+      <span class="sf-num" id="sfNum">10</span>
+      <span class="sf-unit">건</span>
+      <span class="sf-cap">/ 월 10건 한정</span>
+      <span class="sf-urgent" id="sfUrgent">마감 임박</span>
+    </div>
+    <div class="sf-bar"><div class="sf-fill" id="sfFill"></div></div>
+    <p class="sf-trust">국세청 출신 고문이 직접 검토합니다</p>
+    <div id="sfFormArea">
+      <input type="text" class="sf-in" id="sfName" placeholder="성함 *" autocomplete="name">
+      <input type="tel" class="sf-in" id="sfTel" placeholder="연락처 *" autocomplete="tel">
+      <label class="sf-agree"><input type="checkbox" id="sfAg">개인정보 수집·이용 동의 (필수)</label>
+      <button class="sf-btn" id="sfSubmit">무료 점검 신청</button>
+    </div>
+    <div class="sf-done" id="sfDone">신청이 접수되었습니다.<br>영업일 기준 1일 내 연락드리겠습니다.</div>
+  </div>
+  <button class="sf-pill" id="sfPill"><span class="l2"><span class="dot"></span>잔여 <b id="sfPillNum">10</b>건</span></button>
+</div>
+
+<script>
+(function(){
+  /* ── 설정 ─ Apps Script 배포 URL을 넣으면 실데이터 연동, 비우면 수동값 사용 */
+  var SF_API = '';            /* 예 : https://script.google.com/macros/s/XXXX/exec */
+  var SF_LIMIT = 10;          /* 월 한도 */
+  var SF_FALLBACK = 10;       /* API 미연동 시 표시할 잔여 건수 (수동 관리) */
+
+  var wrap=document.getElementById('sfWrap'), numEl=document.getElementById('sfNum'),
+      pillNum=document.getElementById('sfPillNum'), fill=document.getElementById('sfFill'),
+      urgent=document.getElementById('sfUrgent'), btn=document.getElementById('sfSubmit'),
+      title=document.querySelector('.sf-title');
+  var remaining=SF_FALLBACK, animated=false, closedByUser=sessionStorage.getItem('sfMin')==='1';
+  var isMobile=window.matchMedia('(max-width:640px)').matches;
+  if(closedByUser||isMobile) wrap.classList.add('sf-min');
+
+  function paint(){
+    numEl.textContent=remaining; pillNum.textContent=remaining;
+    fill.style.width=Math.max(0,remaining/SF_LIMIT*100)+'%';
+    urgent.style.display=(remaining>0&&remaining<=2)?'inline-block':'none';
+    if(remaining<=0){ title.textContent='이번 달 점검 마감'; btn.textContent='다음 달 신청 문의'; }
+  }
+
+  function countDown(){
+    var cur=SF_LIMIT, t=setInterval(function(){
+      cur--; if(cur<=remaining){cur=remaining;clearInterval(t);} 
+      numEl.textContent=cur; pillNum.textContent=cur;
+    },110);
+    fill.style.width=Math.max(0,remaining/SF_LIMIT*100)+'%';
+    setTimeout(paint,SF_LIMIT*120);
+  }
+
+  if(SF_API){
+    fetch(SF_API).then(function(r){return r.json();}).then(function(j){
+      remaining=Math.max(0,SF_LIMIT-(j.count||0)); if(animated)paint();
+    }).catch(function(){});
+  }
+
+  /* 트러스트 섹션부터 노출, 하단 사전 점검 문의 섹션 도달 시 자동 숨김 */
+  var trigger=document.querySelector('.trust-proof-lite');
+  var contactSec=document.getElementById('contact');
+  function onScroll(){
+    if(!trigger)return;
+    var passedTrust=trigger.getBoundingClientRect().top<window.innerHeight*0.75;
+    var atContact=contactSec?contactSec.getBoundingClientRect().top<window.innerHeight*0.6:false;
+    var show=passedTrust&&!atContact;
+    wrap.classList.toggle('sf-on',show);
+    if(show&&!animated){animated=true;countDown();}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  document.getElementById('sfClose').addEventListener('click',function(){
+    wrap.classList.add('sf-min'); sessionStorage.setItem('sfMin','1');
+  });
+  document.getElementById('sfPill').addEventListener('click',function(){
+    wrap.classList.remove('sf-min'); sessionStorage.removeItem('sfMin');
+  });
+
+  function validPhone(v){return /^0\d{1,2}-?\d{3,4}-?\d{4}$/.test(v.replace(/\s/g,''));}
+
+  window.sfSendLead=function(data,doneCb,failCb){
+    if(!SF_API){ alert('접수 시스템 점검 중입니다.\n잠시 후 다시 신청해 주세요.'); if(failCb)failCb(); return; }
+    fetch(SF_API,{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify(data)})
+      .then(function(r){return r.json();})
+      .then(function(j){ if(j&&j.ok){ remaining=Math.max(0,SF_LIMIT-(j.count||SF_LIMIT-remaining+1)); paint(); doneCb(); } else { throw 0; } })
+      .catch(function(){ alert('일시적인 오류가 발생했습니다.\n잠시 후 다시 신청해 주세요.'); if(failCb)failCb(); });
+  };
+
+  btn.addEventListener('click',function(){
+    var n=document.getElementById('sfName').value.trim(),
+        t=document.getElementById('sfTel').value.trim(),
+        ag=document.getElementById('sfAg').checked;
+    if(!n){alert('성함을 입력해 주세요.');return;}
+    if(!validPhone(t)){alert('연락처를 확인해 주세요.');return;}
+    if(!ag){alert('개인정보 수집·이용 동의가 필요합니다.');return;}
+    btn.disabled=true;
+    sfSendLead({name:n,phone:t,corp:'',interest:'',source:'floating'},
+      function(){ document.getElementById('sfFormArea').style.display='none';
+                  document.getElementById('sfDone').style.display='block'; },
+      function(){ btn.disabled=false; });
+  });
+
+  /* ── 하단 메인 폼도 같은 접수 경로 사용 */
+  var mfBtn=document.getElementById('mfSubmit');
+  if(mfBtn){
+    mfBtn.addEventListener('click',function(){
+      var n=document.getElementById('mfName').value.trim(),
+          t=document.getElementById('mfTel').value.trim(),
+          c=document.getElementById('mfCorp').value.trim(),
+          i=document.getElementById('mfInterest').value,
+          ag=document.getElementById('ag').checked;
+      if(!n){alert('성함을 입력해 주세요.');return;}
+      if(!validPhone(t)){alert('연락처를 확인해 주세요.');return;}
+      if(!ag){alert('개인정보 수집·이용 동의가 필요합니다.');return;}
+      mfBtn.disabled=true;
+      sfSendLead({name:n,phone:t,corp:c,interest:i==='관심 영역'?'':i,source:'main'},
+        function(){ mfBtn.textContent='접수 완료 · 곧 연락드리겠습니다'; },
+        function(){ mfBtn.disabled=false; });
+    });
+  }
+})();
+</script>
 
 <!-- ============================================================
      SCRIPTS : 모든 인터랙션 스크립트 (모듈 M1~M6)
