@@ -6761,7 +6761,7 @@ body{
 
         <div class="asec-view is-active" id="as-core" data-view="core">
           <div class="asec-rhead">
-            <strong>리파인드가 직접 점검하는 핵심 영역</strong>
+            <strong><span class="only-pc">리파인드가 직접 점검하는 핵심 영역</span><span class="only-mo">리파인드가 직접 점검하는<br>핵심 영역</span></strong>
             <p><span class="asec-sub-pc">탭을 눌러 영역별로 확인하세요. 정관부터 승계 시나리오까지, 세무·회계 분야별 회계사팀이 함께 들여다봅니다.</span><span class="asec-sub-mo">탭을 눌러 영역별로 확인하세요.<br>분야별 회계사팀이 함께 들여다봅니다.</span></p>
           </div>
           <div class="asec-subtabs">
@@ -6808,7 +6808,7 @@ body{
         <div class="asec-view" id="as-diff" data-view="diff">
           <div class="asec-rhead">
             <strong>문제는 세금이 아니라,<br>대표님 회사의 구조입니다</strong>
-            <p><span class="asec-sub-pc">같은 매출이어도 구조에 따라 손에 남는 돈은 완전히 달라집니다. 보상·퇴직·승계 중 하나라도 어긋나 있으면, 정작 승계 시점에 세금 낼 현금이 없습니다. 회계사가 회사 구조부터 먼저 들여다보는 이유입니다.</span><span class="asec-sub-mo">구조가 어긋나면 승계 때 낼 현금이 없습니다.<br>회계사가 구조부터 먼저 보는 이유입니다.</span></p>
+            <p><span class="asec-sub-pc">같은 매출이어도 구조에 따라 손에 남는 돈은 완전히 달라집니다. 보상·퇴직·승계 중 하나라도 어긋나 있으면, 정작 승계 시점에 세금 낼 현금이 없습니다. 회계사가 회사 구조부터 먼저 들여다보는 이유입니다.</span><span class="asec-sub-mo">구조가 어긋나면 현금이 부족한 상황이 발생할 수 있습니다.<br>회계사가 구조부터 먼저 보는 이유입니다.</span></p>
           </div>
           <div class="asec-rbox">
             <div class="cmp">
@@ -10287,11 +10287,10 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
 
 /* =========================================================
-   v190 · 대표 자산화 전략 서브탭 모바일 — 좌측정렬 책갈피형 + 가로 스크롤
-   - 가운데 버튼 묶음 → 콘텐츠 박스 위에 꽂힌 책갈피 탭으로 전환
-   - 좌측 시작 정렬, 좌우 16px 여백, auto-width, 한 줄 유지
-   - 5개를 압축하지 않고 overflow-x:auto로 가로 스크롤(끝 탭 살짝 잘림 OK)
-   - active 탭은 하단 콘텐츠 박스(.asec-rbox)에 붙은 책갈피처럼 연결
+   v190 · 대표 자산화 전략 서브탭 모바일 — 5개 한 화면 채움 + 책갈피형
+   - 5개 탭을 한 화면에 모두 표시(가로 스크롤 없음), 라벨 길이에 비례해 폭 분배(균등 아님)
+   - 폰트 12px(360px에서도 5개 라벨 모두 한 줄), 상단만 둥근 책갈피 모양
+   - active(.on)는 하단 콘텐츠 박스(.asec-rbox)에 붙은 책갈피처럼 연결
    - c4·c5 모바일 짧은 라벨 유지 / PC·콘텐츠·타 섹션 미변경
    ========================================================= */
 #asset-strategy .asec-subtab .st-mo{ display:none; }
@@ -10300,50 +10299,49 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
   #asset-strategy .asec-subtab .st-pc{ display:none !important; }
   #asset-strategy .asec-subtab .st-mo{ display:inline !important; }
 
-  /* 탭 스트립: 좌측 시작, 가로 스크롤, 박스와 1px 겹침 */
+  /* 탭 스트립: 5개를 한 화면에 모두 채워 배치(스크롤 없음) */
   #asset-strategy .asec-subtabs{
     width:100% !important;
     max-width:100% !important;
     display:flex !important;
     flex-wrap:nowrap !important;
     align-items:flex-end !important;
-    justify-content:flex-start !important;
-    gap:6px !important;
-    padding:0 16px !important;
+    gap:3px !important;
+    padding:0 !important;
     margin:0 0 -1px !important;
-    overflow-x:auto !important;
-    overflow-y:hidden !important;
-    -webkit-overflow-scrolling:touch !important;
-    scrollbar-width:none !important;
+    overflow:visible !important;
     position:relative !important;
     z-index:5 !important;
   }
-  #asset-strategy .asec-subtabs::-webkit-scrollbar{ display:none !important; }
 
-  /* 각 탭: 텍스트 길이 맞춤 auto-width, 상단만 둥근 책갈피 모양 */
+  /* 각 탭: 라벨 길이에 비례해 폭을 나눠 가짐(균등 아님), 상단만 둥근 책갈피 */
   #asset-strategy .asec-subtab{
-    flex:0 0 auto !important;
-    width:auto !important;
-    min-width:auto !important;
+    min-width:0 !important;
     height:38px !important;
-    padding:0 13px !important;
+    padding:0 4px !important;
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
     white-space:nowrap !important;
-    overflow:visible !important;
+    overflow:hidden !important;
     border:1px solid #D8E8FA !important;
     border-bottom:0 !important;
     border-radius:12px 12px 0 0 !important;
     background:#F8FBFF !important;
     color:#6F7C8E !important;
-    font-size:13px !important;
+    font-size:12px !important;
     line-height:1 !important;
     font-weight:600 !important;
     letter-spacing:-0.45px !important;
     margin-bottom:0 !important;
     box-sizing:border-box !important;
   }
+  /* 라벨 길이에 맞춘 비례 분배(정관 작게 / 임원보수·퇴직금 크게) */
+  #asset-strategy .asec-subtab:nth-child(1){ flex:0.7 1 0 !important; }
+  #asset-strategy .asec-subtab:nth-child(2){ flex:2 1 0 !important; }
+  #asset-strategy .asec-subtab:nth-child(3){ flex:1.3 1 0 !important; }
+  #asset-strategy .asec-subtab:nth-child(4){ flex:1.25 1 0 !important; }
+  #asset-strategy .asec-subtab:nth-child(5){ flex:1.05 1 0 !important; }
 
   /* active 탭: 콘텐츠 박스 위에 올라타 연결된 책갈피 */
   #asset-strategy .asec-subtab.on{
@@ -10481,6 +10479,22 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
   }
 
   #contact .final-lead{ display:none !important; }
+}
+
+
+/* =========================================================
+   v195 · only-mo 토글 유틸 + (모바일) 히어로 상단 여백 = 버튼 하단 간격
+   - .only-mo: PC 숨김 / 모바일 노출 (핵심영역 제목 2줄 분기에 사용)
+   - 히어로 상단 패딩(60px) → 버튼 하단 간격(42px)과 동일하게 맞춤(≤760px)
+   ========================================================= */
+.only-mo{ display:none; }
+
+@media (max-width:809.98px){
+  .only-mo{ display:inline !important; }
+}
+
+@media (max-width:760px){
+  .hero{ padding-top:42px !important; }
 }
 
 </style>
