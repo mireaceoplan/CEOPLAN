@@ -9242,31 +9242,31 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
   .m-float-hl{font-size:18px;font-weight:800;color:#E9C27E;letter-spacing:-.01em;}
 }
 
-/* [v174 · 히어로 모바일: 버튼 하단 이동·풀폭 + 비주얼 카드 네 모서리 정렬 · ≤760] */
-@media (max-width:760px){
+/* [v174.1 · 히어로 모바일: 버튼 하단 이동·풀폭 + 비주얼 카드 네 모서리 정렬 · ≤900 · !important로 90px 등 우선순위 확보] */
+@media (max-width:899.98px){
   /* 버튼을 비주얼 아래로(그리팅식) + 풀폭. 텍스트 가운데 정렬 유지 */
-  .hero .wrap{display:flex;flex-direction:column;}
-  .hero-badge{order:1;align-self:center;}
-  .hero h1{order:2;}
-  .hero .sub{order:3;align-self:center;}
-  .visual-stage{order:4;align-self:center;height:300px;margin:28px auto 0;transform:none;}
-  .hero .cta{order:5;margin-top:26px;}
-  .advertiser{order:6;}
-  .hero .cta .btn{width:100%;}
+  .hero .wrap{display:flex !important;flex-direction:column !important;}
+  .hero-badge{order:1 !important;align-self:center !important;}
+  .hero h1{order:2 !important;}
+  .hero .sub{order:3 !important;align-self:center !important;}
+  .visual-stage{order:4 !important;align-self:center !important;width:calc(100vw - 24px) !important;max-width:540px !important;height:300px !important;margin:28px auto 0 !important;transform:none !important;}
+  .hero .cta{order:5 !important;margin-top:26px !important;width:100% !important;}
+  .advertiser{order:6 !important;}
+  .hero .cta .btn{width:100% !important;}
 
-  /* 비주얼 스테이지: 사진 + 네 모서리 카드 깔끔 정렬 */
-  .image-layer{width:64%;height:208px;top:46px;}
-  .metric-card{width:132px;height:90px;border-radius:14px;}
-  .metric-card .label{font-size:11.5px;margin-bottom:5px;}
-  .metric-card .value{font-size:34px;letter-spacing:-1.5px;}
-  .metric-card .value small{font-size:.32em;margin-left:3px;}
-  .icon-card{width:58px;height:58px;border-radius:13px;}
-  .icon-card svg{width:40px;height:40px;}
+  /* 비주얼 스테이지: 사진 + 네 모서리 카드 (값 90px!important 등을 덮기 위해 전부 !important) */
+  .image-layer{width:64% !important;max-width:240px !important;height:200px !important;top:48px !important;}
+  .metric-card{width:132px !important;height:90px !important;border-radius:14px !important;}
+  .metric-card .label{font-size:11.5px !important;margin-bottom:5px !important;}
+  .metric-card .value{font-size:34px !important;letter-spacing:-1.5px !important;line-height:.9 !important;}
+  .metric-card .value small{font-size:.32em !important;margin-left:3px !important;}
+  .icon-card{width:58px !important;height:58px !important;border-radius:13px !important;}
+  .icon-card svg{width:40px !important;height:40px !important;}
   /* 두 슬라이드 공통 모서리 배치: 숫자=좌상/우하, 아이콘=좌하/우상 */
-  .slide-a .left-metric,.slide-b .left-metric{left:0;top:6px;right:auto;bottom:auto;}
-  .slide-a .right-metric,.slide-b .right-metric{right:0;bottom:6px;left:auto;top:auto;}
-  .slide-a .left-icon,.slide-b .left-icon{left:6px;bottom:16px;right:auto;top:auto;}
-  .slide-a .right-icon,.slide-b .right-icon{right:6px;top:16px;left:auto;bottom:auto;}
+  .slide-a .left-metric,.slide-b .left-metric{left:0 !important;top:6px !important;right:auto !important;bottom:auto !important;}
+  .slide-a .right-metric,.slide-b .right-metric{right:0 !important;bottom:6px !important;left:auto !important;top:auto !important;}
+  .slide-a .left-icon,.slide-b .left-icon{left:6px !important;bottom:16px !important;right:auto !important;top:auto !important;}
+  .slide-a .right-icon,.slide-b .right-icon{right:6px !important;top:16px !important;left:auto !important;bottom:auto !important;}
 }
 
 </style>
