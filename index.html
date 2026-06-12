@@ -6812,7 +6812,7 @@ body{
           </div>
           <div class="asec-rbox">
             <div class="cmp">
-              <div class="r h"><div class="c l">일반적인 방식</div><div class="c r2">리파인드와 함께라면</div></div>
+              <div class="r h"><div class="c l">일반적인 방식</div><div class="c r2"><span class="only-pc">리파인드와 함께라면</span><span class="only-mo">리파인드 방식</span></div></div>
               <div class="r"><div class="c l"><span class="mk">–</span>신고할 숫자만 봅니다</div><div class="c r2"><span class="mk">✓</span>회사와 대표님 자산을 한 번에 봅니다</div></div>
               <div class="r"><div class="c l"><span class="mk">–</span>세금이 나오면 그때 줄입니다</div><div class="c r2"><span class="mk">✓</span>세금이 나오기 전에 구조를 잡습니다</div></div>
               <div class="r"><div class="c l"><span class="mk">–</span>세금을 줄이는 선에서 끝납니다</div><div class="c r2"><span class="mk">✓</span>정작 낼 현금이 없는 상황을 막습니다</div></div>
@@ -8636,7 +8636,7 @@ modal.classList.remove('open');
       </div>
       <div class="form">
         <div class="ft">사전 점검 문의</div>
-        <div class="fs">필수 정보만 받습니다 · 1분 소요</div>
+        <div class="fs">필수 정보만 받습니다 · 15초 소요</div>
         <div class="fg"><input type="text" id="mfName" placeholder="성함 *"></div>
         <div class="fg"><input type="tel" id="mfTel" placeholder="연락처 *"></div>
         <div class="fg"><input type="text" id="mfCorp" placeholder="법인명"></div>
@@ -10355,11 +10355,15 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
     transform:translateY(1px) !important;
   }
 
-  /* 콘텐츠 박스를 탭 바로 아래에 붙임(간격 0), 탭이 위에 올라타도록 z-index 낮춤 */
+  /* 콘텐츠 박스를 탭 바로 아래에 붙임(간격 0), 탭이 위에 올라타도록 z-index 낮춤
+     + 상단을 평평한 #EEF7FF로 맞춰 active 탭과 이음새 없이 연결(책갈피) */
   #asset-strategy #as-core .asec-rbox{
     margin-top:0 !important;
     position:relative !important;
     z-index:3 !important;
+    background:linear-gradient(180deg, #EEF7FF 0%, #DCEBFA 100%) !important; /* 상단 흰 radial 제거 → active 탭(#EEF7FF)과 동색 */
+    border-color:#BFDDFB !important;
+    border-radius:3px 3px 18px 18px !important; /* 상단 거의 평평(탭이 꽂히도록), 하단만 둥글게 */
   }
 }
 
@@ -10495,6 +10499,20 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
 @media (max-width:760px){
   .hero{ padding-top:42px !important; }
+}
+
+
+/* =========================================================
+   v196 · (모바일) 비교표 헤더 가운데 정렬
+   - "일반적인 방식" / "리파인드 방식" 헤더 셀만 중앙 정렬(본문 셀은 좌측 유지)
+   ========================================================= */
+@media (max-width:809.98px){
+  #asset-strategy .cmp .r.h .c,
+  #asset-strategy .cmp .r.h .c.l,
+  #asset-strategy .cmp .r.h .c.r2{
+    justify-content:center !important;
+    text-align:center !important;
+  }
 }
 
 </style>
