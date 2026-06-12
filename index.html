@@ -7215,6 +7215,58 @@ body{
   .rf-modal-head h2{font-size:18px;}
   .rf-modal-body{padding:18px;font-size:14px;line-height:1.7;}
 }
+
+/* ===== v200 · PC 전용: 점검 항목 탭 강조 + 클릭 유도 (모바일 영향 없음) ===== */
+.asec-subtab-hint{ display:none; }
+@media (min-width:810px){
+  /* 탭 자체를 크고 또렷하게 → 버튼처럼 */
+  #asset-strategy .asec-subtab{
+    font-size:17px !important;
+    font-weight:700 !important;
+    color:#5A6473 !important;
+    padding:20px 16px 20px !important;
+    transition:transform .18s ease, box-shadow .2s ease, background .18s ease, color .18s ease, border-color .18s ease !important;
+  }
+  /* 골드 상단 액센트: 호버/활성 시 슬라이드 인 (레이아웃 영향 없는 ::before) */
+  #asset-strategy .asec-subtab::before{
+    content:"" !important; position:absolute !important; left:12px; right:12px; top:-1px; height:3px;
+    background:linear-gradient(90deg,var(--gold),#D9C39C) !important; border-radius:3px 3px 0 0;
+    transform:scaleX(0); transform-origin:center; opacity:0;
+    transition:transform .22s ease, opacity .22s ease; pointer-events:none;
+  }
+  #asset-strategy .asec-subtab:hover::before,
+  #asset-strategy .asec-subtab.on::before{ transform:scaleX(1); opacity:1; }
+  /* 비활성 탭 호버: 살짝 떠오르며 그림자 (명확한 클릭 어포던스) */
+  #asset-strategy .asec-subtab:not(.on):hover{
+    transform:translateY(-4px) !important;
+    background:#fff !important;
+    color:var(--navy) !important;
+    border-color:rgba(196,167,125,0.65) !important;
+    box-shadow:0 -10px 20px rgba(30,58,95,0.13) !important;
+  }
+  /* 활성 탭: 더 진하게 + 골드 그림자 (아래 박스와 연결은 유지) */
+  #asset-strategy .asec-subtab.on{
+    color:var(--navy) !important;
+    font-weight:800 !important;
+    padding:20px 16px 20px !important;
+    box-shadow:0 -7px 18px rgba(196,167,125,0.18) !important;
+  }
+  /* 클릭 유도 힌트 (PC만) — 마지막 탭 바로 옆·깜빡깜빡 (탭 줄과 함께 흐름) */
+  #asset-strategy .asec-subtab-hint{
+    display:inline-flex !important; align-items:center; gap:5px;
+    align-self:center; margin:0 0 0 8px;
+    padding:7px 12px; border-radius:999px;
+    background:var(--navy); color:#fff;
+    font-size:12.5px; font-weight:700; letter-spacing:-0.01em; white-space:nowrap;
+    box-shadow:0 8px 18px rgba(30,58,95,0.22);
+    animation:asecHintBlink 1s ease-in-out infinite; pointer-events:none;
+  }
+  @keyframes asecHintBlink{ 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+}
+@media (min-width:810px) and (prefers-reduced-motion:reduce){
+  #asset-strategy .asec-subtab-hint{ animation:none; }
+  #asset-strategy .asec-subtab:not(.on):hover{ transform:none !important; }
+}
 </style>
 </head>
 <body>
@@ -7231,7 +7283,7 @@ body{
      02 · NAV : 상단 고정 내비게이션
      ============================================================ -->
 <header class="nav"><div class="wrap">
-  <div class="logo">refined<span>.</span></div>
+  <div class="logo" role="link" tabindex="0" aria-label="회계법인 리파인드 홈 — 새로고침하여 상단으로" style="cursor:pointer" onclick="if('scrollRestoration' in history){history.scrollRestoration='manual';}location.href=location.pathname+location.search;" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();if('scrollRestoration' in history){history.scrollRestoration='manual';}location.href=location.pathname+location.search;}">refined<span>.</span></div>
   <nav class="nav-menu">
     <a href="#asset-strategy">점검 항목</a><a href="#expert-cases">전문가</a><a href="#cases">사례</a><a href="#faq">자주 묻는 질문</a>
   </nav>
@@ -7421,6 +7473,7 @@ body{
             <button class="asec-subtab" data-st="c3" type="button">유족보상금</button>
             <button class="asec-subtab" data-st="c4" type="button"><span class="st-pc">재무·세무 리스크</span><span class="st-mo">재무리스크</span></button>
             <button class="asec-subtab" data-st="c5" type="button"><span class="st-pc">승계 시나리오</span><span class="st-mo">승계준비</span></button>
+            <span class="asec-subtab-hint" aria-hidden="true">👈 눌러보세요</span>
           </div>
           <div class="asec-rbox">
             <div class="asec-panel on" data-st="c1">
@@ -9052,6 +9105,29 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
       panels.forEach(function(p){ p.classList.toggle('on', p.getAttribute('data-st')===st); });
     });
   });
+
+  /* 힌트: 마지막 탭(승계 시나리오)과 같은 줄에 있을 때만 표시.
+     애매하게 좁아져 힌트만 아래로 떨어지는 상태에서는 자동으로 숨김.
+     (CSS가 display:inline-flex !important 이므로, 숨길 때도 !important로 지정해야 함) */
+  var hint = root.querySelector('.asec-subtab-hint');
+  if(hint){
+    var allTabs = root.querySelectorAll('.asec-subtab');
+    var lastTab = allTabs[allTabs.length-1];
+    function syncHint(){
+      hint.style.removeProperty('display');          // 측정 위해 CSS 기본값으로 복귀
+      var hr = hint.getBoundingClientRect();
+      if(hr.width === 0 && hr.height === 0) return;   // 숨김 상태(모바일 등)면 그대로 둠
+      var hc = hr.top + hr.height/2;                  // 힌트 세로 중심
+      var lr = lastTab.getBoundingClientRect();
+      var sameLine = (hc >= lr.top) && (hc <= lr.bottom);
+      if(!sameLine){ hint.style.setProperty('display','none','important'); }
+    }
+    syncHint();
+    window.addEventListener('resize', syncHint);
+    window.addEventListener('load', syncHint);
+    setTimeout(syncHint, 300);
+    if(document.fonts && document.fonts.ready){ document.fonts.ready.then(syncHint); }
+  }
 })();
 
 /* ============================================================
