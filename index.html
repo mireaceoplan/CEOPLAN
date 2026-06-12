@@ -6834,7 +6834,7 @@ body{
               </li>
               <li class="proc-row">
                 <div class="proc-l"><span class="proc-num">STEP 02</span><span class="proc-title">사전 상담 · 자료 수집</span></div>
-                <div class="proc-r">회사 현황을 듣고, 점검에 필요한 자료(정관·재무제표 등)를 안내드립니다.</div>
+                <div class="proc-r">회사 현황을 듣고, 점검에 필요한 자료<span class="only-pc">(정관·재무제표 등)</span>를 안내드립니다.</div>
               </li>
               <li class="proc-row">
                 <div class="proc-l"><span class="proc-num">STEP 03</span><span class="proc-title">구조 점검 · 분석</span></div>
@@ -8631,7 +8631,7 @@ modal.classList.remove('open');
     <div class="final"><div class="final-grid">
       <div>
         <h2>우리 회사 구조, 이대로 괜찮은지<br>늦기 전에 확인해 보세요.</h2>
-        <p>배당을 해도 되는지, 퇴직금은 준비되어 있는지, 승계는 언제부터 봐야 하는지 회계법인이 먼저 짚어 드립니다.</p>
+        <p class="final-lead">배당을 해도 되는지, 퇴직금은 준비되어 있는지, 승계는 언제부터 봐야 하는지 회계법인이 먼저 짚어 드립니다.</p>
         <div class="final-trust">빅4 출신 회계사 7인<span class="d">·</span>국세청 출신 고문<span class="d">·</span>점검 → 실행 → 관리</div>
       </div>
       <div class="form">
@@ -8658,8 +8658,7 @@ modal.classList.remove('open');
       <div class="fi">
         <span class="s">대표자 이종헌</span><br>
         사업자등록번호 830-81-03620<br>
-        서울특별시 강남구 강남대로 140길 18, 3층<br>
-        카카오톡 · 블로그
+        서울특별시 강남구 강남대로 140길 18, 3층
       </div>
     </div>
     <div class="fcol"><h4>점검 서비스</h4><a href="#asset-strategy">정관 점검</a><a href="#asset-strategy">임원보수·퇴직금</a><a href="#asset-strategy">유족보상금</a><a href="#asset-strategy">세무 리스크</a><a href="#asset-strategy">승계 시나리오</a></div>
@@ -10288,12 +10287,12 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
 
 /* =========================================================
-   v190 · 대표 자산화 전략 서브탭 모바일 정렬 (auto-width + 박스 연결)
-   - 모바일에서 5개 탭(.asec-subtab)을 텍스트 길이 맞춤 auto-width로 한 줄 배치 (균등폭 아님)
-   - 폰트 12.5px, padding/gap 최소화, 높이 36px 유지, 한 줄 유지(2줄 wrap 금지)
-   - c4·c5는 모바일 전용 짧은 라벨(재무리스크/승계준비) 표시, PC 라벨 유지
-   - active(.on) 색/배경 디자인 유지 + 하단 콘텐츠 박스에 붙여 연결감 부여
-   - PC 레이아웃·콘텐츠 텍스트/이미지·타 섹션은 변경하지 않음
+   v190 · 대표 자산화 전략 서브탭 모바일 — 좌측정렬 책갈피형 + 가로 스크롤
+   - 가운데 버튼 묶음 → 콘텐츠 박스 위에 꽂힌 책갈피 탭으로 전환
+   - 좌측 시작 정렬, 좌우 16px 여백, auto-width, 한 줄 유지
+   - 5개를 압축하지 않고 overflow-x:auto로 가로 스크롤(끝 탭 살짝 잘림 OK)
+   - active 탭은 하단 콘텐츠 박스(.asec-rbox)에 붙은 책갈피처럼 연결
+   - c4·c5 모바일 짧은 라벨 유지 / PC·콘텐츠·타 섹션 미변경
    ========================================================= */
 #asset-strategy .asec-subtab .st-mo{ display:none; }
 
@@ -10301,59 +10300,68 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
   #asset-strategy .asec-subtab .st-pc{ display:none !important; }
   #asset-strategy .asec-subtab .st-mo{ display:inline !important; }
 
+  /* 탭 스트립: 좌측 시작, 가로 스크롤, 박스와 1px 겹침 */
   #asset-strategy .asec-subtabs{
+    width:100% !important;
+    max-width:100% !important;
     display:flex !important;
     flex-wrap:nowrap !important;
     align-items:flex-end !important;
-    justify-content:center !important;
-    gap:3px !important;
-    width:100% !important;
-    max-width:100% !important;
-    margin:0 0 -1px !important;          /* 하단 박스와 1px 겹쳐 연결 */
-    padding:0 !important;
-    overflow:visible !important;
+    justify-content:flex-start !important;
+    gap:6px !important;
+    padding:0 16px !important;
+    margin:0 0 -1px !important;
+    overflow-x:auto !important;
+    overflow-y:hidden !important;
+    -webkit-overflow-scrolling:touch !important;
+    scrollbar-width:none !important;
     position:relative !important;
-    z-index:3 !important;
+    z-index:5 !important;
   }
+  #asset-strategy .asec-subtabs::-webkit-scrollbar{ display:none !important; }
 
-  /* 텍스트 길이에 맞춘 auto-width(균등폭 아님): 짧은 탭 작게, 긴 탭만 필요한 만큼 */
-  #asset-strategy .asec-subtab,
-  #asset-strategy .asec-subtab.on{
-    flex:0 1 auto !important;
+  /* 각 탭: 텍스트 길이 맞춤 auto-width, 상단만 둥근 책갈피 모양 */
+  #asset-strategy .asec-subtab{
+    flex:0 0 auto !important;
     width:auto !important;
-    min-width:0 !important;
-    height:36px !important;
-    padding:0 5px !important;
-    font-size:12.5px !important;
-    letter-spacing:-0.55px !important;
-    line-height:1 !important;
-    white-space:nowrap !important;
-    overflow:visible !important;
+    min-width:auto !important;
+    height:38px !important;
+    padding:0 13px !important;
     display:flex !important;
     align-items:center !important;
     justify-content:center !important;
+    white-space:nowrap !important;
+    overflow:visible !important;
+    border:1px solid #D8E8FA !important;
+    border-bottom:0 !important;
+    border-radius:12px 12px 0 0 !important;
+    background:#F8FBFF !important;
+    color:#6F7C8E !important;
+    font-size:13px !important;
+    line-height:1 !important;
+    font-weight:600 !important;
+    letter-spacing:-0.45px !important;
     margin-bottom:0 !important;
     box-sizing:border-box !important;
   }
 
-  /* 가장 긴 탭(임원보수·퇴직금)만 자간 살짝 더 좁혀 한 줄 여유 확보 */
-  #asset-strategy .asec-subtab:nth-child(2){
-    letter-spacing:-0.75px !important;
-  }
-
-  /* active 탭을 하단 콘텐츠 박스에 붙여 연결감 부여 */
+  /* active 탭: 콘텐츠 박스 위에 올라타 연결된 책갈피 */
   #asset-strategy .asec-subtab.on{
+    background:#EEF7FF !important;
+    color:#0E3A66 !important;
+    font-weight:700 !important;
+    border-color:#BFDDFB !important;
+    border-bottom-color:#EEF7FF !important;
     position:relative !important;
-    z-index:4 !important;
-    border-bottom:1px solid #EEF7FF !important;   /* 박스 상단 배경색과 맞춤 */
+    z-index:6 !important;
     transform:translateY(1px) !important;
   }
 
-  /* 콘텐츠 박스(.asec-rbox)를 탭 바로 아래 붙임 (빈 간격 제거) */
+  /* 콘텐츠 박스를 탭 바로 아래에 붙임(간격 0), 탭이 위에 올라타도록 z-index 낮춤 */
   #asset-strategy #as-core .asec-rbox{
     margin-top:0 !important;
     position:relative !important;
-    z-index:2 !important;
+    z-index:3 !important;
   }
 }
 
@@ -10453,6 +10461,26 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
     justify-content:center !important;
     padding-left:0 !important;
   }
+}
+
+
+/* =========================================================
+   v194 · (모바일 전용) 프로세스 STEP02 문구 / CTA 헤드라인·본문 조정
+   - STEP02: "(정관·재무제표 등)" 숨김 (PC는 유지)
+   - CTA 헤드라인: 2줄 고정(폰트 축소로 3줄 방지)
+   - CTA 본문(.final-lead): 모바일에서 숨김 (PC는 유지)
+   ========================================================= */
+@media (max-width:809.98px){
+  .only-pc{ display:none !important; }
+
+  #contact .final h2{
+    font-size:21px !important;
+    line-height:1.36 !important;
+    letter-spacing:-0.5px !important;
+    word-break:keep-all !important;
+  }
+
+  #contact .final-lead{ display:none !important; }
 }
 
 </style>
