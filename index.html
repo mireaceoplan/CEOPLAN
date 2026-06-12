@@ -6360,6 +6360,39 @@ body{
   background:#CBCDD3 !important;
   background:linear-gradient(180deg,#E2E4EA 0%,#C3C7CF 100%) !important;
 }
+
+/* [v182 · Why Refined CTA 전문가팀 카드 하단 텍스트 모바일 정렬/압축 · ≤809.98]
+@media (max-width:809.98px){
+  #why-refined-banner .why-refined-card{
+    padding:10px 10px 12px !important;
+  }
+
+  #why-refined-banner .why-card-body{
+    margin:12px 8px 0 !important;
+    text-align:center !important;
+  }
+
+  #why-refined-banner .why-card-body strong{
+    font-size:16px !important;
+    line-height:1.34 !important;
+    letter-spacing:-0.35px !important;
+    font-weight:740 !important;
+    text-align:center !important;
+  }
+
+  #why-refined-banner .why-card-tags{
+    margin:8px 8px 0 !important;
+    padding-top:7px !important;
+    font-size:11.8px !important;
+    line-height:1.36 !important;
+    letter-spacing:-0.25px !important;
+    text-align:center !important;
+    white-space:normal !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -6490,7 +6523,10 @@ body{
   <div class="why-refined-shell">
     <div class="why-refined-banner">
       <div class="why-refined-copy">
-        <h2>올해 배당을 할까요,<br>승계는 언제부터 준비해야 할까요?</h2>
+        <h2>
+          <span class="pc-cta-title">올해 배당을 할까요,<br>승계는 언제부터 준비해야 할까요?</span>
+          <span class="mo-cta-title">올해 배당을 할까요?<br>승계준비는 언제부터?</span>
+        </h2>
         <p>이 질문에 ‘숫자와 근거’로 답하는 회계법인 팀이 필요합니다.</p>
         <a href="#expert-cases" class="why-refined-btn">리파인드 전문가 그룹 보기 <span>→</span></a>
       </div>
@@ -9338,6 +9374,417 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
   .trust-proof-lite .press .pe{margin-bottom:4px !important;}
 }
 
+/* [v177 · 신뢰 배지(trust-pills) 모바일: 4개 한 줄 노출 · ≤809.98]
+   - 줄바꿈(wrap) → 한 줄(nowrap), 4개가 다 보이도록 글자/패딩 축소 + 가운데 정렬
+   - 풀블리드로 화면 폭을 다 써서 4개를 한 줄에 수용(아주 좁은 기기는 스크롤 폴백) */
+@media (max-width:809.98px){
+  .trust-proof-lite .trust-pills{
+    display:flex !important;
+    flex-wrap:nowrap !important;
+    justify-content:center !important;
+    align-items:center !important;
+    gap:4px !important;
+    max-width:none !important;
+    margin:0 -20px 26px !important;     /* 풀블리드: 화면 폭 전부 사용 */
+    padding:0 10px !important;
+    overflow-x:auto !important;
+    -webkit-overflow-scrolling:touch !important;
+    scrollbar-width:none !important;
+  }
+  .trust-proof-lite .trust-pills::-webkit-scrollbar{display:none !important;}
+  .trust-proof-lite .trust-pills .c{
+    flex:0 0 auto !important;
+    white-space:nowrap !important;
+    font-size:10.5px !important;
+    padding:0 7px !important;
+    min-height:29px !important;
+    letter-spacing:-.02em !important;
+  }
+}
+
+
+/* [v178 · WHY REFINED CTA 모바일 깨짐 보정 · ≤809.98]
+   - PC 레이아웃은 그대로 두고 모바일에서만 배너를 1열 카드형으로 재정렬
+   - 제목 폭/폰트/줄바꿈을 모바일 프레임 안에 고정해 우측 잘림 방지 */
+@media (max-width:809.98px){
+  #why-refined-banner.why-refined-cta{
+    padding:28px 0 36px !important;
+    overflow:hidden !important;
+  }
+
+  #why-refined-banner .why-refined-shell{
+    width:100% !important;
+    max-width:calc(100vw - 32px) !important;
+    margin:0 auto !important;
+    padding:0 !important;
+    box-sizing:border-box !important;
+  }
+
+  #why-refined-banner .why-refined-banner{
+    position:relative !important;
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:24px !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:auto !important;
+    min-height:0 !important;
+    margin:0 auto !important;
+    padding:26px 20px 22px !important;
+    border-radius:14px !important;
+    overflow:hidden !important;
+  }
+
+  #why-refined-banner .why-refined-copy{
+    position:relative !important;
+    left:auto !important;
+    right:auto !important;
+    top:auto !important;
+    bottom:auto !important;
+    width:100% !important;
+    max-width:100% !important;
+    padding:0 !important;
+    margin:0 !important;
+    text-align:left !important;
+    box-sizing:border-box !important;
+  }
+
+  #why-refined-banner .why-refined-copy h2{
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 !important;
+    font-size:24px !important;
+    line-height:1.42 !important;
+    letter-spacing:-0.8px !important;
+    font-weight:700 !important;
+    color:#fff !important;
+    word-break:keep-all !important;
+    overflow-wrap:normal !important;
+    white-space:normal !important;
+  }
+
+  #why-refined-banner .why-refined-copy p{
+    width:100% !important;
+    max-width:100% !important;
+    margin:16px 0 0 !important;
+    font-size:14px !important;
+    line-height:1.62 !important;
+    letter-spacing:-0.2px !important;
+    font-weight:500 !important;
+    color:rgba(255,255,255,.72) !important;
+    word-break:keep-all !important;
+    overflow-wrap:normal !important;
+  }
+
+  #why-refined-banner .why-refined-btn{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    max-width:100% !important;
+    height:46px !important;
+    margin-top:24px !important;
+    padding:0 16px !important;
+    border-radius:4px !important;
+    font-size:14px !important;
+    line-height:1 !important;
+    white-space:nowrap !important;
+    box-sizing:border-box !important;
+  }
+
+  #why-refined-banner .why-refined-card{
+    position:relative !important;
+    left:auto !important;
+    right:auto !important;
+    top:auto !important;
+    bottom:auto !important;
+    display:flex !important;
+    flex-direction:column !important;
+    width:100% !important;
+    max-width:300px !important;
+    height:auto !important;
+    min-height:0 !important;
+    margin:0 auto !important;
+    padding:10px 10px 14px !important;
+    border-radius:14px !important;
+    background:#fff !important;
+    box-sizing:border-box !important;
+    overflow:hidden !important;
+  }
+
+  #why-refined-banner .why-card-top{
+    position:relative !important;
+    left:auto !important;
+    right:auto !important;
+    top:auto !important;
+    bottom:auto !important;
+    width:100% !important;
+    height:auto !important;
+    flex:0 0 auto !important;
+    border-radius:10px !important;
+    overflow:hidden !important;
+  }
+
+  #why-refined-banner .why-card-top img{
+    display:block !important;
+    width:100% !important;
+    height:auto !important;
+    aspect-ratio:306/148 !important;
+    object-fit:contain !important;
+    object-position:center center !important;
+    transform:none !important;
+  }
+
+  #why-refined-banner .why-card-body{
+    position:relative !important;
+    left:auto !important;
+    right:auto !important;
+    top:auto !important;
+    bottom:auto !important;
+    width:auto !important;
+    margin:12px 6px 0 !important;
+    color:#27272A !important;
+  }
+
+  #why-refined-banner .why-card-body strong{
+    display:block !important;
+    font-size:15px !important;
+    line-height:1.45 !important;
+    letter-spacing:-0.3px !important;
+    font-weight:700 !important;
+    color:#27272A !important;
+    word-break:keep-all !important;
+  }
+
+  #why-refined-banner .why-card-tags{
+    position:relative !important;
+    left:auto !important;
+    right:auto !important;
+    top:auto !important;
+    bottom:auto !important;
+    width:auto !important;
+    margin:10px 6px 0 !important;
+    padding-top:8px !important;
+    border-top:1px solid #E9ECF0 !important;
+    font-size:10.5px !important;
+    line-height:1.45 !important;
+    letter-spacing:-0.2px !important;
+    color:#667085 !important;
+    white-space:normal !important;
+    overflow:visible !important;
+    text-overflow:clip !important;
+  }
+}
+
+/* [v179 · 신뢰 배지/방송 카드 모바일 가독성 보정 · ≤809.98]
+   - v177의 4개 한 줄 축소값을 덮어써서 2x2 배치로 변경
+   - 배지 텍스트와 방송 카드 캡션을 읽을 수 있는 크기로 복구 */
+@media (max-width:809.98px){
+  .trust-proof-lite .wrap{
+    padding-top:58px !important;
+    padding-bottom:34px !important;
+  }
+
+  .trust-proof-lite .trust-head{
+    margin-bottom:24px !important;
+  }
+
+  .trust-proof-lite .proof-lbl{
+    font-size:22px !important;
+    line-height:1.42 !important;
+    letter-spacing:-0.6px !important;
+    word-break:keep-all !important;
+  }
+
+  .trust-proof-lite .proof-desc{
+    max-width:310px !important;
+    margin-top:14px !important;
+    font-size:14px !important;
+    line-height:1.62 !important;
+    word-break:keep-all !important;
+  }
+
+  .trust-proof-lite .trust-pills{
+    display:grid !important;
+    grid-template-columns:repeat(2, minmax(0, 1fr)) !important;
+    justify-content:center !important;
+    align-items:stretch !important;
+    gap:8px !important;
+    width:100% !important;
+    max-width:320px !important;
+    margin:0 auto 30px !important;
+    padding:0 !important;
+    overflow:visible !important;
+    scrollbar-width:auto !important;
+  }
+
+  .trust-proof-lite .trust-pills .c{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    width:100% !important;
+    min-width:0 !important;
+    min-height:38px !important;
+    padding:0 10px !important;
+    border-radius:999px !important;
+    font-size:12.5px !important;
+    line-height:1.2 !important;
+    letter-spacing:-0.3px !important;
+    font-weight:700 !important;
+    white-space:nowrap !important;
+    color:#1E3A5F !important;
+    background:#fff !important;
+    border:1px solid #D8E0EA !important;
+    box-sizing:border-box !important;
+  }
+
+  .trust-proof-lite .press-row{
+    gap:14px !important;
+    margin:0 -20px !important;
+    padding:2px 20px 6px !important;
+  }
+
+  .trust-proof-lite .press{
+    flex:0 0 86vw !important;
+    max-width:326px !important;
+    border-radius:14px !important;
+    border:1px solid #E1E7EF !important;
+    box-shadow:0 6px 18px rgba(30,58,95,.06) !important;
+  }
+
+  .trust-proof-lite .press img{
+    height:178px !important;
+    aspect-ratio:auto !important;
+    object-fit:cover !important;
+  }
+
+  .trust-proof-lite .press figcaption{
+    padding:14px 15px 15px !important;
+  }
+
+  .trust-proof-lite .press .pe{
+    margin-bottom:6px !important;
+    font-size:12.5px !important;
+    line-height:1.35 !important;
+    font-weight:700 !important;
+  }
+
+  .trust-proof-lite .press .pt{
+    font-size:15px !important;
+    line-height:1.42 !important;
+    font-weight:700 !important;
+    letter-spacing:-0.2px !important;
+    word-break:keep-all !important;
+  }
+}
+
+
+/* [v180 · Why Refined CTA 모바일 임팩트 복구 · ≤809.98]
+   - v178의 안전 보정은 유지하되, 제목/버튼/전문가팀 카드 크기감을 v177 이전에 가깝게 복구
+   - PC 레이아웃에는 영향 없음 */
+.mo-only-break{display:none !important;}
+@media (max-width:809.98px){
+  #why-refined-banner .mo-only-break{
+    display:block !important;
+  }
+
+  #why-refined-banner.why-refined-cta{
+    padding:28px 0 40px !important;
+  }
+
+  #why-refined-banner .why-refined-shell{
+    max-width:calc(100vw - 28px) !important;
+  }
+
+  #why-refined-banner .why-refined-banner{
+    gap:28px !important;
+    padding:28px 22px 26px !important;
+    border-radius:14px !important;
+    background:#1E3A5F !important;
+  }
+
+  #why-refined-banner .why-refined-copy h2{
+    font-size:clamp(29px, 8.2vw, 31px) !important;
+    line-height:1.25 !important;
+    letter-spacing:-1.25px !important;
+    font-weight:780 !important;
+    word-break:keep-all !important;
+    overflow-wrap:normal !important;
+  }
+
+  #why-refined-banner .why-refined-copy p{
+    margin-top:18px !important;
+    font-size:14.5px !important;
+    line-height:1.64 !important;
+    font-weight:600 !important;
+    color:rgba(255,255,255,.76) !important;
+  }
+
+  #why-refined-banner .why-refined-btn{
+    height:48px !important;
+    margin-top:26px !important;
+    font-size:14.5px !important;
+    font-weight:700 !important;
+  }
+
+  #why-refined-banner .why-refined-card{
+    max-width:328px !important;
+    padding:10px 10px 15px !important;
+    border-radius:14px !important;
+  }
+
+  #why-refined-banner .why-card-top{
+    border-radius:10px !important;
+  }
+
+  #why-refined-banner .why-card-body{
+    margin:14px 7px 0 !important;
+  }
+
+  #why-refined-banner .why-card-body strong{
+    font-size:16px !important;
+    line-height:1.45 !important;
+    font-weight:740 !important;
+  }
+
+  #why-refined-banner .why-card-tags{
+    margin:10px 7px 0 !important;
+    padding-top:9px !important;
+    font-size:11px !important;
+    line-height:1.45 !important;
+  }
+}
+
+
+/* [v181 · Why Refined CTA 모바일 문구/전문가팀 카드 폭 보정 · ≤809.98]
+   - PC 문구는 유지, 모바일에서만 CTA 제목 문구를 짧게 교체
+   - 모바일 전문가팀 카드는 버튼과 동일한 가로폭으로 맞춤 */
+#why-refined-banner .mo-cta-title{display:none !important;}
+#why-refined-banner .pc-cta-title{display:block !important;}
+
+@media (max-width:809.98px){
+  #why-refined-banner .pc-cta-title{
+    display:none !important;
+  }
+
+  #why-refined-banner .mo-cta-title{
+    display:block !important;
+  }
+
+  #why-refined-banner .why-refined-copy h2{
+    font-size:clamp(31px, 8.7vw, 34px) !important;
+    line-height:1.24 !important;
+    letter-spacing:-1.35px !important;
+    font-weight:800 !important;
+  }
+
+  #why-refined-banner .why-refined-card{
+    width:100% !important;
+    max-width:100% !important;
+    margin:0 !important;
+    justify-self:stretch !important;
+  }
+}
 </style>
 
 </body>
