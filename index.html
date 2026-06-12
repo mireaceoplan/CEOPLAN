@@ -8502,9 +8502,27 @@ modal.classList.remove('open');
 .sf-pill .dot{width:8px;height:8px;border-radius:50%;background:#C4A77D;display:inline-block;animation:sfPulse 1.8s infinite;}
 .sf-pill b{color:#D8C29B;}
 @keyframes sfPulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.sf-bar-cta{display:none;}
 #sfWrap.sf-min .sf-card{display:none;}
 #sfWrap.sf-min .sf-pill{display:flex;}
-@media (max-width:640px){#sfWrap{right:14px;bottom:14px;}.sf-card{width:calc(100vw - 28px);max-width:296px;}}
+@media (max-width:640px){
+  /* === 모바일 : 플로팅 폼 → 하단 고정 바 + 풀폭 바텀시트 (v172) === */
+  #sfWrap{left:0;right:0;bottom:0;}
+
+  /* 접힘 기본 = 풀폭 하단 CTA 바 (엄지 닿는 위치, 비침투형) */
+  .sf-pill{width:100%;height:auto;min-height:60px;flex-direction:row;align-items:center;gap:10px;border-radius:16px 16px 0 0;padding:14px 18px calc(14px + env(safe-area-inset-bottom));background:#C4A77D;box-shadow:0 -8px 28px rgba(0,0,0,.22);}
+  .sf-pill .l2{font-size:16px;font-weight:700;color:#1A1A1A;}
+  .sf-pill b{color:#1A1A1A;}
+  .sf-pill .dot{background:#1A1A1A;}
+  .sf-bar-cta{display:inline-block;margin-left:auto;font-size:16px;font-weight:800;color:#1A1A1A;}
+  .sf-bar-cta:after{content:"\203A";margin-left:6px;font-size:18px;}
+
+  /* 펼침 = 풀폭 바텀시트 */
+  .sf-card{width:100%;max-width:none;box-sizing:border-box;border-radius:18px 18px 0 0;padding:18px 18px calc(16px + env(safe-area-inset-bottom));box-shadow:0 -10px 36px rgba(0,0,0,.4);}
+  .sf-title{font-size:18px;}
+  .sf-num{font-size:46px;}
+  .sf-x{font-size:28px;padding:6px 4px 6px 14px;}
+}
 </style>
 
 <div id="sfWrap" aria-live="polite">
@@ -8529,8 +8547,29 @@ modal.classList.remove('open');
     </div>
     <div class="sf-done" id="sfDone">신청이 접수되었습니다.<br>영업일 기준 1일 내 연락드리겠습니다.</div>
   </div>
-  <button class="sf-pill" id="sfPill"><span class="l2"><span class="dot"></span>잔여 <b id="sfPillNum">10</b>건</span></button>
+  <button class="sf-pill" id="sfPill"><span class="l2"><span class="dot"></span>잔여 <b id="sfPillNum">10</b>건</span><span class="sf-bar-cta">무료 점검 신청</span></button>
 </div>
+
+<!-- 모바일 전용 하단 플로팅 배너 (PC에서는 CSS로 숨김) · 클릭 시 #contact 이동 -->
+<a href="#contact" class="m-float-cta" id="mFloatCta" aria-label="무료 점검 신청">
+  <span class="m-float-txt"><span class="m-float-sub">회사는 키웠는데, 대표님 자산은요?</span><span class="m-float-main"><span class="m-float-hl">남은 <span id="mFloatNum">10</span>자리로</span> 무료 점검받기</span></span>
+</a>
+<script>
+(function(){
+  var b=document.getElementById('mFloatCta'); if(!b) return;
+  var c=document.getElementById('contact');
+  /* 클릭 → 상담 CTA 섹션으로 바로 이동 (전역 smooth 무시, 즉시 점프) */
+  b.addEventListener('click',function(e){ if(c){ e.preventDefault(); c.scrollIntoView({behavior:'instant',block:'start'}); } });
+  /* 상담 섹션 근처에선 배너를 내려 실제 폼을 가리지 않음 */
+  function upd(){ if(!c) return; var near=c.getBoundingClientRect().top<window.innerHeight*0.8; b.style.transform=near?'translateY(130%)':'translateY(0)'; }
+  window.addEventListener('scroll',upd,{passive:true}); window.addEventListener('resize',upd); upd();
+  /* 폼 위젯(#sfNum)의 실시간 잔여 수치를 배너 숫자(#mFloatNum)에 미러링 */
+  var src=document.getElementById('sfNum'), out=document.getElementById('mFloatNum');
+  function syncNum(){ if(src&&out){ var v=(src.textContent||'').trim(); if(v) out.textContent=v; } }
+  syncNum();
+  if(src&&window.MutationObserver){ new MutationObserver(syncNum).observe(src,{childList:true,characterData:true,subtree:true}); }
+})();
+</script>
 
 <script>
 (function(){
@@ -9159,6 +9198,77 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
     border-radius:20px !important;
   }
 }
+</style>
+
+<style id="mobile-optimization">
+/* ============================================================
+   MOBILE OPTIMIZATION LAYER  ·  모바일 전용 작업 모음
+   ------------------------------------------------------------
+   - 이 블록은 문서 맨 끝이라, 앞의 모든 모바일 규칙보다 우선합니다.
+   - 앞으로 "모바일 수정"은 전부 여기에만 누적합니다. (PC는 절대 안 건드림)
+   - 기준 디바이스: iPhone 390px / Galaxy 360px → 폰 폭(max-width:480px) 중심,
+     필요 시 640/768px 구간 보강.
+   - 작업 로그: 수정할 때마다 아래에 [vXXX · 섹션 · 한 줄 설명] 주석을 남깁니다.
+   - 참고) 플로팅 신청폼의 모바일 바/시트(v172)는 폼 스타일 옆에 이미 있습니다.
+   ============================================================ */
+
+/* ──────────────────────────────────────────────────────────
+   여기부터 섹션별 모바일 작업을 추가합니다.
+   ────────────────────────────────────────────────────────── */
+
+/* [v173 · 상단 띠배너+GNB 제거 / 하단 플로팅 배너 신설 · 모바일 전용] */
+.m-float-cta{display:none;}   /* PC 기본 숨김 */
+
+@media (max-width:899.98px){
+  /* 1) 상단 띠배너 + GNB 제거 (둘 다 in-flow라 빈 공간 보정 불필요) */
+  .topbar{display:none !important;}
+  header.nav{display:none !important;}
+
+  /* 2) 기존 플로팅 신청폼은 모바일에서 숨김 → 아래 새 배너로 대체 */
+  #sfWrap{display:none !important;}
+
+  /* 3) 하단 플로팅 배너 (그라데이션 배경 · 가운데 정렬 · 흰 텍스트 · 강조 문구만 골드) */
+  .m-float-cta{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    position:fixed;left:0;right:0;bottom:0;z-index:120;text-align:center;
+    padding:13px 18px calc(13px + env(safe-area-inset-bottom));
+    background:linear-gradient(100deg,#16233F 0%,#213A6B 52%,#2B54A6 100%);
+    box-shadow:0 -8px 26px rgba(0,0,0,.28);
+    text-decoration:none;transition:transform .3s ease;
+  }
+  .m-float-txt{display:flex;flex-direction:column;gap:2px;line-height:1.32;align-items:center;}
+  .m-float-sub{font-size:15px;font-weight:600;color:#fff;letter-spacing:-.01em;}
+  .m-float-main{font-size:15px;font-weight:600;color:#fff;letter-spacing:-.01em;}
+  .m-float-hl{font-size:18px;font-weight:800;color:#E9C27E;letter-spacing:-.01em;}
+}
+
+/* [v174 · 히어로 모바일: 버튼 하단 이동·풀폭 + 비주얼 카드 네 모서리 정렬 · ≤760] */
+@media (max-width:760px){
+  /* 버튼을 비주얼 아래로(그리팅식) + 풀폭. 텍스트 가운데 정렬 유지 */
+  .hero .wrap{display:flex;flex-direction:column;}
+  .hero-badge{order:1;align-self:center;}
+  .hero h1{order:2;}
+  .hero .sub{order:3;align-self:center;}
+  .visual-stage{order:4;align-self:center;height:300px;margin:28px auto 0;transform:none;}
+  .hero .cta{order:5;margin-top:26px;}
+  .advertiser{order:6;}
+  .hero .cta .btn{width:100%;}
+
+  /* 비주얼 스테이지: 사진 + 네 모서리 카드 깔끔 정렬 */
+  .image-layer{width:64%;height:208px;top:46px;}
+  .metric-card{width:132px;height:90px;border-radius:14px;}
+  .metric-card .label{font-size:11.5px;margin-bottom:5px;}
+  .metric-card .value{font-size:34px;letter-spacing:-1.5px;}
+  .metric-card .value small{font-size:.32em;margin-left:3px;}
+  .icon-card{width:58px;height:58px;border-radius:13px;}
+  .icon-card svg{width:40px;height:40px;}
+  /* 두 슬라이드 공통 모서리 배치: 숫자=좌상/우하, 아이콘=좌하/우상 */
+  .slide-a .left-metric,.slide-b .left-metric{left:0;top:6px;right:auto;bottom:auto;}
+  .slide-a .right-metric,.slide-b .right-metric{right:0;bottom:6px;left:auto;top:auto;}
+  .slide-a .left-icon,.slide-b .left-icon{left:6px;bottom:16px;right:auto;top:auto;}
+  .slide-a .right-icon,.slide-b .right-icon{right:6px;top:16px;left:auto;bottom:auto;}
+}
+
 </style>
 
 </body>
