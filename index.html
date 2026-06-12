@@ -7267,6 +7267,23 @@ body{
   #asset-strategy .asec-subtab-hint{ animation:none; }
   #asset-strategy .asec-subtab:not(.on):hover{ transform:none !important; }
 }
+
+/* ===== v201 · 모바일 전용: 현재 선택 탭 상단 골드 글로우 점멸 강조 (하단 이음새 보존) ===== */
+@media (max-width:809.98px){
+  #asset-strategy .asec-subtab.on{ animation:none !important; }   /* 전체 글로우 제거 */
+  #asset-strategy .asec-subtab.on::after{
+    content:"" !important;
+    position:absolute !important; left:16%; right:16%; top:3px; height:3px;
+    border-radius:3px; background:var(--gold);
+    box-shadow:0 0 9px 1px rgba(196,167,125,0.9);
+    animation: asecTabTop 1.15s ease-in-out infinite;
+    pointer-events:none; z-index:7;
+  }
+  @keyframes asecTabTop{ 0%,100%{ opacity:0.18; } 50%{ opacity:1; } }
+}
+@media (max-width:809.98px) and (prefers-reduced-motion:reduce){
+  #asset-strategy .asec-subtab.on::after{ animation:none; opacity:1; }
+}
 </style>
 </head>
 <body>
