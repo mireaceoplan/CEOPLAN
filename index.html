@@ -9216,6 +9216,15 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
    여기부터 섹션별 모바일 작업을 추가합니다.
    ────────────────────────────────────────────────────────── */
 
+/* ===== 공통 모바일 토큰 · 섹션 공통값을 먼저 묶는다 (그리팅 프레임 방식) =====
+   작업 원칙:
+   ① 섹션 좌우 여백 = var(--m-gutter) 로 통일  (= .wrap 패딩 24px 와 동일)
+   ② 비주얼/카드군은 width:100% 로 하나의 '프레임'으로 묶는다
+   ③ 개별 카드·요소는 viewport 기준이 아니라 그 프레임 기준으로 배치
+   → 이 순서를 모든 섹션에 동일 적용한다.
+   ========================================================================= */
+:root{ --m-gutter:24px; }
+
 /* [v173 · 상단 띠배너+GNB 제거 / 하단 플로팅 배너 신설 · 모바일 전용] */
 .m-float-cta{display:none;}   /* PC 기본 숨김 */
 
@@ -9262,11 +9271,71 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
   .metric-card .value small{font-size:.32em !important;margin-left:3px !important;}
   .icon-card{width:58px !important;height:58px !important;border-radius:13px !important;box-shadow:0 6px 14px rgba(30,58,95,.12) !important;}
   .icon-card svg{width:40px !important;height:40px !important;}
-  /* 두 슬라이드 공통 모서리 배치: 숫자=좌상/우하, 아이콘=좌하/우상 */
-  .slide-a .left-metric,.slide-b .left-metric{left:0 !important;top:6px !important;right:auto !important;bottom:auto !important;}
-  .slide-a .right-metric,.slide-b .right-metric{right:0 !important;bottom:6px !important;left:auto !important;top:auto !important;}
-  .slide-a .left-icon,.slide-b .left-icon{left:6px !important;bottom:16px !important;right:auto !important;top:auto !important;}
-  .slide-a .right-icon,.slide-b .right-icon{right:6px !important;top:16px !important;left:auto !important;bottom:auto !important;}
+  /* slide-a (1번 배너) — 현재 배치 유지: 숫자=좌상/우하, 아이콘=좌하/우상 */
+  .slide-a .left-metric{left:0 !important;top:6px !important;right:auto !important;bottom:auto !important;}      /* 20+건 → 좌상 */
+  .slide-a .right-metric{right:0 !important;bottom:6px !important;left:auto !important;top:auto !important;}     /* 600억 → 우하 */
+  .slide-a .left-icon{left:6px !important;bottom:16px !important;right:auto !important;top:auto !important;}     /* 막대 → 좌하 */
+  .slide-a .right-icon{right:6px !important;top:16px !important;left:auto !important;bottom:auto !important;}    /* 도넛 → 우상 */
+  /* slide-b (2번 배너) — 좌우 반전: 3세대=우상 / 화살표=좌상 / 5~10년=좌하 / 삼각형=우하 */
+  .slide-b .left-metric{right:0 !important;top:6px !important;left:auto !important;bottom:auto !important;}      /* 3세대 → 우상 */
+  .slide-b .right-metric{left:0 !important;bottom:6px !important;right:auto !important;top:auto !important;}     /* 5~10년 → 좌하 */
+  .slide-b .left-icon{right:6px !important;bottom:16px !important;left:auto !important;top:auto !important;}     /* 삼각형 → 우하 */
+  .slide-b .right-icon{left:6px !important;top:16px !important;right:auto !important;bottom:auto !important;}    /* 화살표 → 좌상 */
+}
+
+/* [v174.2 · 카드 뒤 경계선 제거 · ≤900]
+   원인: 스테이지 overflow:hidden 이 가장자리 카드의 그림자를 직선으로 잘라냄.
+   해결: 스테이지 클립은 풀고(visible), 교차 애니메이션 이미지는 hero에서 클립.
+   (카드는 24px 안쪽이라 hero 클립에 안 걸림 → 그림자 온전, 화면밖 이미지만 잘림) */
+@media (max-width:899.98px){
+  .hero{overflow:hidden !important;}
+  .visual-stage{overflow:visible !important;}
+}
+
+/* [v175 · 히어로 h1 모바일: 단어 분리 방지 + 크기/행간/자간 · ≤900]
+   - keep-all로 '드뭅니다' 중간 분리 방지(필요 시 어절 단위로만 줄바꿈)
+   - br 줄바꿈은 마크업에 그대로 유지 / PC(≥900)는 미적용 */
+@media (max-width:899.98px){
+  .hero h1{
+    word-break:keep-all !important;
+    overflow-wrap:normal !important;
+    font-size:31px !important;
+    line-height:1.34 !important;
+    letter-spacing:-1.1px !important;
+  }
+}
+
+/* [v176 · 신뢰 증명(proofband) 모바일: 방송·언론 카드 가로 스와이프 · ≤809.98]
+   - PC/태블릿 그리드(4단/2단)는 그대로, 모바일 1단 스택만 가로 스크롤로 교체
+   - overflow-x + scroll-snap, 카드폭 84vw, 다음 카드 살짝 peek, 이미지 160px, 내부 여백 축소
+   - 링크 없는 이미지 섹션이라 hover/클릭 효과 제거(flat) */
+@media (max-width:809.98px){
+  .trust-proof-lite .press-row{
+    display:flex !important;
+    grid-template-columns:none !important;
+    flex-wrap:nowrap !important;
+    overflow-x:auto !important;
+    scroll-snap-type:x mandatory !important;
+    scroll-padding-left:20px !important;
+    gap:12px !important;
+    width:auto !important;
+    max-width:none !important;
+    margin:0 -20px !important;            /* wrap 20px 패딩 상쇄 → 화면 끝까지 스크롤 */
+    padding:2px 20px !important;          /* 첫·끝 카드 = 20px 거터 */
+    -webkit-overflow-scrolling:touch !important;
+    scrollbar-width:none !important;
+  }
+  .trust-proof-lite .press-row::-webkit-scrollbar{display:none !important;}
+  .trust-proof-lite .press{
+    flex:0 0 84vw !important;             /* 카드폭 82~86vw */
+    scroll-snap-align:start !important;
+    box-shadow:none !important;          /* 클릭 유도 효과 최소화(flat) */
+    transition:none !important;
+  }
+  .trust-proof-lite .press:hover{transform:none !important;box-shadow:none !important;}
+  .trust-proof-lite .press img{aspect-ratio:auto !important;height:160px !important;}  /* 이미지 높이 압축 */
+  .trust-proof-lite .press figcaption{padding:11px 13px 12px !important;}              /* 내부 여백 축소 */
+  .trust-proof-lite .press .pe{margin-bottom:4px !important;}
 }
 
 </style>
