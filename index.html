@@ -8654,6 +8654,8 @@ modal.classList.remove('open');
   var isMobile=window.matchMedia('(max-width:640px)').matches;
   if(closedByUser||isMobile) wrap.classList.add('sf-min');
 
+  var apiLoaded=false, pendingAnimation=false;
+
   function paint(){
     numEl.textContent=remaining; pillNum.textContent=remaining;
     fill.style.width=Math.max(0,remaining/SF_LIMIT*100)+'%';
@@ -8662,6 +8664,7 @@ modal.classList.remove('open');
   }
 
   function countDown(){
+    if(!apiLoaded){ pendingAnimation=true; return; }
     var cur=SF_LIMIT, t=setInterval(function(){
       cur--; if(cur<=remaining){cur=remaining;clearInterval(t);} 
       numEl.textContent=cur; pillNum.textContent=cur;
@@ -8672,8 +8675,12 @@ modal.classList.remove('open');
 
   if(SF_API){
     fetch(SF_API).then(function(r){return r.json();}).then(function(j){
-      remaining=Math.max(0,SF_LIMIT-(j.count||0)); if(animated)paint();
-    }).catch(function(){});
+      remaining=Math.max(0,SF_LIMIT-(j.count||0));
+      apiLoaded=true;
+      if(pendingAnimation){ countDown(); } else if(animated){ paint(); }
+    }).catch(function(){ apiLoaded=true; if(pendingAnimation) countDown(); });
+  } else {
+    apiLoaded=true;
   }
 
   /* 트러스트 섹션부터 노출, 하단 사전 점검 문의 섹션 도달 시 자동 숨김 */
