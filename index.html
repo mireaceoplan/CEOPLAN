@@ -8760,7 +8760,12 @@ modal.classList.remove('open');
       if(!mfOk){return;}
       mfBtn.disabled=true;
       sfSendLead({name:n,phone:t,corp:c,interest:i==='관심 영역'?'':i,marketing:mkt,source:'main'},
-        function(){ document.getElementById('mfFormArea').style.display='none'; document.getElementById('mfDone').style.display='block'; },
+        function(){
+          var ftEl=document.querySelector('#contact .form .ft');
+          if(ftEl) ftEl.style.display='none';
+          document.getElementById('mfFormArea').style.display='none';
+          document.getElementById('mfDone').style.display='block';
+        },
         function(){ mfBtn.disabled=false; });
     });
   }
