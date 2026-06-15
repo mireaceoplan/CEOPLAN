@@ -8743,7 +8743,8 @@ modal.classList.remove('open');
           t=document.getElementById('mfTel').value.trim(),
           c=document.getElementById('mfCorp').value.trim(),
           i=document.getElementById('mfInterest').value,
-          ag=document.getElementById('ag').checked;
+          ag=document.getElementById('ag').checked,
+          mkt=document.getElementById('agMkt').checked;
       clearFormErrs([['mfName','errMfName'],['mfTel','errMfTel'],['ag','errMfAg']]);
       var mfOk=true;
       if(!n){setErr('mfName','errMfName','성함을 입력해 주세요.');mfOk=false;}
@@ -8751,7 +8752,7 @@ modal.classList.remove('open');
       if(!ag){setErr('ag','errMfAg','개인정보 수집·이용 동의가 필요합니다.');mfOk=false;}
       if(!mfOk){return;}
       mfBtn.disabled=true;
-      sfSendLead({name:n,phone:t,corp:c,interest:i==='관심 영역'?'':i,source:'main'},
+      sfSendLead({name:n,phone:t,corp:c,interest:i==='관심 영역'?'':i,marketing:mkt,source:'main'},
         function(){ document.getElementById('mfFormArea').style.display='none'; document.getElementById('mfDone').style.display='block'; },
         function(){ mfBtn.disabled=false; });
     });
